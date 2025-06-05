@@ -1,0 +1,29 @@
+---
+const acts = [
+  { day: 'Freitag', artist: 'Benedict Bendenelli', time: '17:00 - 22:00', genre: 'Disco House' },
+  { day: 'Freitag', artist: 'Timo Diels', time: '16:00 - 21:00', genre: '80er & 90er Beats' },
+  { day: 'Freitag', artist: 'Josh', time: '21:00 - 22:00', genre: 'Shades of Pop' },
+  { day: 'Samstag', artist: '', time: '14:00 - 19:00', genre: 'Lounge & Chill out' },
+  { day: 'Sonntag', artist: 'the madley', time: 'ab 16:30', genre: '4 Live Sessions zwischen den DJ Sets' },
+];
+---
+<style>
+  .programm {
+    padding: var(--spacing-xl) var(--spacing-md);
+    background-color: var(--color-secondary);
+  }
+  .programm h2 {
+    font-family: var(--font-heading);
+  }
+  .programm ul {
+    padding-left: 1.2rem;
+  }
+</style>
+<section id="programm" class="programm">
+  <h2>Programm</h2>
+  <ul>
+    {acts.map((act) => (
+      <li><strong>{act.day}</strong>: {act.artist} – {act.time} | {act.genre}</li>
+    ))}
+  </ul>
+</section>

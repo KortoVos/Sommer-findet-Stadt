@@ -1,0 +1,27 @@
+---
+import '../styles/variables.css';
+---
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sommer findet Stadt</title>
+    <style>
+      body {
+        font-family: var(--font-base);
+        color: var(--color-text);
+        margin: 0;
+      }
+      main {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--spacing-md);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
