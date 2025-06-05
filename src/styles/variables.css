@@ -1,16 +1,19 @@
 :root {
-  --color-primary: #f6a800;
-  --color-secondary: #f8f1e5;
-  --color-text: #1e1e1e;
-  --color-accent: #d94f04;
+  --color-primary: #d03164;
+  --color-secondary: #ea506e;
+  --color-text: #d6b9da;
+  --color-accent: #ffcd1c;
+  --color-accent: #6ec5d0;
+  --color-text: #666666;
+  --color-background: hsla(293, 31%, 79%, 0.1);
 
-  --font-base: 'Open Sans', sans-serif;
-  --font-heading: 'Poppins', sans-serif;
+    --font-base: 'Quicksand', sans-serif;
+    --font-heading: 'Montserrat ExtraBold', 'Montserrat', sans-serif;
 
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
-  --spacing-lg: 2rem;
+  --spacing-lg: 6rem;
   --spacing-xl: 4rem;
 
-  --max-width: 1200px;
+  --max-width: 1000px;
 }

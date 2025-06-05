@@ -1,0 +1,10 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Sommer findet Stadt Festival
+DTSTART:20250808T160000Z
+DTEND:20250810T220000Z
+LOCATION:Marktplatz Troisdorf-Sieglar
+DESCRIPTION:Zwei Tage voller Genuss, Musik und Sommerflair in Troisdorf-Sieglar!
+END:VEVENT
+END:VCALENDAR
