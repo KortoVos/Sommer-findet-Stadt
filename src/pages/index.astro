@@ -6,6 +6,39 @@ import Highlights from '../components/Highlights.astro';
 import Programm from '../components/Programm.astro';
 import Throwback from '../components/Throwback.astro';
 import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+const products = [
+  {
+    title: 'My Storehouse',
+    pages: [
+      {
+        subTitle: 'Sofa Cake',
+        items: [
+          { name: 'Sofa', dimensions: '100x100', image: '/img/chair1.png' },
+          { name: 'Easychair & Table', dimensions: '150x100', image: '/img/chair2.png' },
+          { name: 'Easychair Round', dimensions: '50x50', image: '/img/chair3.png' },
+        ],
+      },
+      {
+        subTitle: 'Blob Sofa',
+        items: [
+          { name: 'Carrots', dimensions: '15x2', image: '/img/chair4.png' },
+          { name: 'Grape', dimensions: '50x50', image: '/img/sofa.png' },
+          { name: 'Pear', dimensions: '10x10', image: '/img/chair1.png' },
+        ],
+      },
+      {
+        subTitle: 'Herb Pods',
+        items: [
+          { name: 'Mint', dimensions: '220x180', image: '/img/chair1.png' },
+          { name: 'Lemon', dimensions: '40x40', image: '/img/chair1.png' },
+          { name: 'Cherry', dimensions: '10x20', image: '/img/chair1.png' },
+        ],
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout>
@@ -14,5 +47,6 @@ import Footer from '../components/Footer.astro';
   <Highlights />
   <Programm />
   <Throwback />
+  <!-- <ProductCard products={products} /> -->
   <Footer slot="footer" />
 </BaseLayout>

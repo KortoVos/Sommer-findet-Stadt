@@ -1,29 +1,116 @@
 ---
 const acts = [
-  { day: 'Freitag', artist: 'Benedict Bendenelli', time: '17:00 - 22:00', genre: 'Disco House' },
-  { day: 'Freitag', artist: 'Timo Diels', time: '16:00 - 21:00', genre: '80er & 90er Beats' },
-  { day: 'Freitag', artist: 'Josh', time: '21:00 - 22:00', genre: 'Shades of Pop' },
-  { day: 'Samstag', artist: '', time: '14:00 - 19:00', genre: 'Lounge & Chill out' },
-  { day: 'Sonntag', artist: 'the madley', time: 'ab 16:30', genre: '4 Live Sessions zwischen den DJ Sets' },
-];
+  {
+    "day": "Freitag",
+    "artist": "Benedict Bendenelli",
+    "time": "17:00 - 22:00",
+    "details": "Disco House"
+  },
+  {
+    "day": "Samstag",
+    "artist": "Timo Diels",
+    "time": "16:00 - 21:00",
+    "details": "80er & 90er Beats"
+  },
+  {
+    "day": "Samstag",
+    "artist": "the madley",
+    "time": "Ab 16:30",
+    "details": "4 Live Sessions zwischen den DJ Sets"
+  },
+  {
+    "day": "Samstag",
+    "artist": "Josh",
+    "time": "21:00 - 22:00",
+    "details": "shades of pop"
+  },
+  {
+    "day": "Sonntag",
+    "artist": "",
+    "time": "14:00 - 19:00",
+    "details": "Lounge & Chill out"
+  }
+]
+;
 ---
 <style>
   .programm {
     padding: var(--spacing-xl) var(--spacing-md);
-    background-color: var(--color-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
   }
-  .programm h2 {
-    font-family: var(--font-heading);
+
+  .lineup-image {
+    flex: 1;
+    max-width: 50%;
+    width: 100%;
   }
-  .programm ul {
-    padding-left: 1.2rem;
+
+  .lineup-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .acts-list {
+    flex: 1;
+    max-width: 50%;
+    width: 100%;
+  }
+
+  .dayHeading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-accentSecondary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .artist {
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+
+  .details {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 768px) {
+    .programm {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .acts-list {
+      order: -1;
+      max-width: 100%;
+    }
+
+    .lineup-image {
+      max-width: 100%;
+    }
   }
 </style>
+
 <section id="programm" class="programm">
-  <h2>Programm</h2>
-  <ul>
-    {acts.map((act) => (
-      <li><strong>{act.day}</strong>: {act.artist} – {act.time} | {act.genre}</li>
+  <div class="lineup-image">
+    <img src="/banner-lineup.png" alt="Lineup Banner" />
+  </div>
+  <div class="acts-list">
+    {['Freitag', 'Samstag', 'Sonntag'].map((day) => (
+      <div>
+        <h2 class="dayHeading">{day}</h2>
+        <ul>
+          {acts
+            .filter((act) => act.day === day)
+            .map((act) => (
+              <li>
+                <span class="artist">{act.artist}</span><br/>
+                <span class="details">{act.time} | {act.details}</span>
+              </li>
+            ))}
+        </ul>
+      </div>
     ))}
-  </ul>
+  </div>
 </section>
