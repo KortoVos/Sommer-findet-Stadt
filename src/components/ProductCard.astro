@@ -1,56 +1,15 @@
 ---
+import productList from '../data/productList';
 
-const productList = {
-    title: 'My Storehouse',
-    pages: [
-        {
-            subTitle: 'Sofa Cake',
-            gradient: ['#ffe372', '#fc7700'],
-            items: [
-                { name: 'Sofa', dimensions: '100x100', image: './img/chair1.png' },
-                { name: 'Easychair & Table', dimensions: '150x100', image: './img/chair2.png' },
-                { name: 'Easychair Round', dimensions: '50x50', image: './img/chair3.png' },
-            ],
-        },
-        {
-            subTitle: 'Blob Sofa',
-            gradient: ['#b16ffc', '#724ec8'],
-            items: [
-                { name: 'Carrots', dimensions: '15x2', image: './img/chair4.png' },
-                { name: 'Grape', dimensions: '50x50', image: './img/sofa.png' },
-                { name: 'Pear', dimensions: '10x10', image: './img/chair1.png' },
-            ],
-        },
-        {
-            subTitle: 'Herb Pods',
-            gradient: ['#60f1d8', '#58dec8'],
-            items: [
-                { name: 'Mint', dimensions: '220x180', image: './img/chair1.png' },
-                { name: 'Lemon', dimensions: '40x40', image: './img/chair1.png' },
-                { name: 'Cherry', dimensions: '10x20', image: './img/chair1.png' },
-            ],
-        },
-        {
-            subTitle: 'Te Pods',
-            gradient: ['#e698ba', '#cea0b4'],
-            items: [
-                { name: 'Mint', dimensions: '220x180', image: './img/chair1.png' },
-                { name: 'Lemon', dimensions: '40x40', image: './img/chair1.png' },
-                { name: 'Cherry', dimensions: '10x20', image: './img/chair1.png' },
-            ],
-        },
-        {
-            subTitle: 'GEG Pods',
-            gradient: ['#722480', '#8b6392'],
-            items: [
-                { name: 'Mint', dimensions: '220x180', image: './img/chair1.png' },
-                { name: 'Lemon', dimensions: '40x40', image: './img/chair1.png' },
-                { name: 'Cherry', dimensions: '10x20', image: './img/chair1.png' },
-            ],
-        }
-    ],
-};
+
 ---
+
+
+<style>
+  {offsetStyles}
+</style>
+
+
 
 <section class="productCard">
     <body>
@@ -64,6 +23,7 @@ const productList = {
                     class="sliderSelection"
                     name="position"
                     id={`input${index + 1}`}
+                    style={`grid-column: ${index+3} / ${index+3};grid-row: -1/-2;`}
                     checked={index === 0}
                 />
             ))}
@@ -343,6 +303,7 @@ const productList = {
         transition: var(--animationFunction);
     }
 
+    
     div.rotatingDiv2:nth-of-type(2) {
         --imgContainerPosition: 1;
     }
@@ -419,44 +380,20 @@ const productList = {
 
     div.item:nth-of-type(1) {
         --offset: 1;
-        /* background-color: #90f1ef; */
     }
     div.item:nth-of-type(2) {
         --offset: 2;
-        /* background-color: #ff70a6; */
     }
     div.item:nth-of-type(3) {
         --offset: 3;
-        /* background-color: #ff9770; */
     }
     div.item:nth-of-type(4) {
         --offset: 4;
-        /* background-color: #ffd670; */
     }
     div.item:nth-of-type(5) {
         --offset: 5;
-        /* background-color: #e9ff70; */
     }
-    #input1 {
-        grid-column: 3 / 3;
-        grid-row: -1/-2;
-    }
-    #input2 {
-        grid-column: 4 / 4;
-        grid-row: -1/-2;
-    }
-    #input3 {
-        grid-column: 5 / 5;
-        grid-row: -1/-2;
-    }
-    #input4 {
-        grid-column: 6 / 6;
-        grid-row: -1/-2;
-    }
-    #input5 {
-        grid-column: 7 / 7;
-        grid-row: -1/-2;
-    }
+
 
     #input1:checked ~ div#carousel {
         --position: 1;
