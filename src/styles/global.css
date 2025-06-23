@@ -1,5 +1,12 @@
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/montserrat/600.css";
+@import "@fontsource/montserrat/800.css";
+@import "@fontsource/quicksand/400.css";
+@import "@fontsource/quicksand/700.css";
+
 h2 {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: 800;
   color: var(--color-primary);
   margin: 0;
@@ -7,8 +14,24 @@ h2 {
 }
 
 h3 {
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 2rem;
+  font-weight: 600;
   color: var(--color-accentSecondary);
   margin: 0.5rem 0 1.5rem;
+  font-family: var(--font-heading);
+}
+
+
+body {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+}
+
+body p{
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text);
+  font-family: var(--font-heading);
 }

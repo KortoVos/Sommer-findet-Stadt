@@ -1,14 +1,14 @@
 :root {
-  --color-primary: #d03164;
-  --color-secondary: #ea506e;
-  --color-text: #d6b9da;
+  --color-primary: #ea506e;
+  --color-secondary: #d03164;
+  /* --color-text: #d6b9da; */
   --color-accent: #ffcd1c;
   --color-accentSecondary: #6ec5d0;
-  --color-text: #666666;
+  --color-text: #4d4d4d;
   --color-background: hsla(293, 31%, 79%, 0.1);
 
     --font-base: 'Quicksand', sans-serif;
-    --font-heading: 'Montserrat ExtraBold', 'Montserrat', sans-serif;
+    --font-heading: 'Montserrat', sans-serif;
 
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
