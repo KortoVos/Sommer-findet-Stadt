@@ -1,0 +1,64 @@
+---
+const { target = 100, label = "Example text" } = Astro.props;
+const id = `counter-${Math.floor(Math.random() * 100000)}`;
+---
+
+<div class="counter-container">
+  <div
+    class="counter-number"
+    id={id}
+    data-target={target}
+  >
+    0
+  </div>
+  <div class="counter-label">{label}</div>
+
+  <script>
+    // Animate the number from 0 to target
+    function animateCounter(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        const target = 5000;
+        const duration = 2000;
+        const start = 0;
+        const startTime = performance.now();
+        function animate(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const value = Math.floor(progress * (target - start) + start);
+          el.textContent = value.toString();
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            el.textContent = target;
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+    }
+    animateCounter("{id}");
+  </script>
+</div>
+
+<style>
+  .counter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-base);
+    margin: var(--spacing-md);
+  }
+
+  .counter-number {
+    font-size: 4rem;
+    font-family: var(--font-heading);
+    color: var(--color-accent);
+    font-weight: bold;
+  }
+
+  .counter-label {
+    font-size: 1rem;
+    color: var(--color-accentSecondary);
+    margin-top: var(--spacing-sm);
+  }
+</style>
