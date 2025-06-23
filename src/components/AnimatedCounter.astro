@@ -1,44 +1,56 @@
 ---
 const { target = 100, label = "Example text" } = Astro.props;
-const id = `counter-${Math.floor(Math.random() * 100000)}`;
 ---
 
-<div class="counter-container">
-  <div
-    class="counter-number"
-    id={id}
-    data-target={target}
-  >
-    0
+<animated-counter data-target={target} data-label={label}>
+  <div class="counter-container">
+    <div class="counter-number">0</div>
+    <div class="counter-label">{label}</div>
   </div>
-  <div class="counter-label">{label}</div>
+</animated-counter>
 
-  <script>
-    // Animate the number from 0 to target
-    function animateCounter(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        const target = 5000;
-        const duration = 2000;
-        const start = 0;
-        const startTime = performance.now();
-        function animate(now) {
-          const elapsed = now - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const value = Math.floor(progress * (target - start) + start);
-          el.textContent = value.toString();
-          if (progress < 1) {
-            requestAnimationFrame(animate);
-          } else {
-            el.textContent = target;
-          }
+<script>
+  class AnimatedCounter extends HTMLElement {
+    connectedCallback() {
+      const target = parseInt(this.getAttribute('data-target'), 10) || 0;
+      const numberEl = this.querySelector('.counter-number');
+      let hasAnimated = false;
+      const duration = 2000; // ms
+      const start = 0;
+      const easeOutQuad = (t) => t * (2 - t); // Ease out function
+      const animate = (startTime) => {
+        const now = performance.now();
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOutQuad(progress);
+        const value = Math.floor(start + (target - start) * eased);
+        numberEl.textContent = value.toLocaleString();
+        if (progress < 1) {
+          requestAnimationFrame(() => animate(startTime));
+        } else {
+          numberEl.textContent = target.toLocaleString();
         }
-        requestAnimationFrame(animate);
-      }
+      };
+      const startAnimation = () => {
+        if (!hasAnimated) {
+          hasAnimated = true;
+          requestAnimationFrame((startTime) => animate(startTime));
+        }
+      };
+      // Intersection Observer to trigger animation on scroll
+      const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startAnimation();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.5 });
+      observer.observe(this);
     }
-    animateCounter("{id}");
-  </script>
-</div>
+  }
+  customElements.define('animated-counter', AnimatedCounter);
+</script>
 
 <style>
   .counter-container {
@@ -50,7 +62,8 @@ const id = `counter-${Math.floor(Math.random() * 100000)}`;
   }
 
   .counter-number {
-    font-size: 4rem;
+    width: 1.5em;
+    font-size: 5rem;
     font-family: var(--font-heading);
     color: var(--color-accent);
     font-weight: bold;

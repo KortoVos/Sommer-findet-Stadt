@@ -6,7 +6,7 @@ const galleryImages = [
   "./photo-festival-crowd.png",
   "./photo-festival-crowd.png",
   "./photo-festival-crowd.png",
-  "./photo-festival-crowd.png"
+  "./photo-festival-crowd.png",
 ];
 ---
 
@@ -76,45 +76,53 @@ const galleryImages = [
 
 <section id="throwback" class="throwback">
   <h2>Throwback</h2>
-    <h3>
-       Rückblick auf die letzten Jahre
-      </h3>
+  <h3>Rückblick auf die letzten Jahre</h3>
   <div class="carousel">
-    {galleryImages.map((image, index) => (
-      <div class={`carousel-item ${index === 0 ? 'active' : ''}`}>
-        <img src={image} alt="Throwback Image" />
-      </div>
-    ))}
+    {
+      galleryImages.map((image, index) => (
+        <div class={`carousel-item ${index === 0 ? "active" : ""}`}>
+          <img src={image} alt="Throwback Image" />
+        </div>
+      ))
+    }
   </div>
   <div class="carousel-dots">
-    {galleryImages.map((_, index) => (
-      <div class={`carousel-dot ${index === 0 ? 'active' : ''}`} data-index={index}></div>
-    ))}
+    {
+      galleryImages.map((_, index) => (
+        <div
+          class={`carousel-dot ${index === 0 ? "active" : ""}`}
+          data-index={index}
+        />
+      ))
+    }
   </div>
-  <AnimatedCounter target={5000} label="Liters of wine" id="LitersOfWine" />
-
+  <div style="display: flex; gap: var(--spacing-lg); justify-content: center; margin-top: var(--spacing-lg);">
+    <AnimatedCounter target={4} label="Jahre Sommer findet Stadt" id="LitersOfWine1" />
+    <AnimatedCounter target={8000} label="Besucher" id="LitersOfWine2" />
+    <AnimatedCounter target={600} label="Liter Wein wurden getrunken" id="LitersOfWine3" />
+  </div>
 </section>
 
 <script>
-  const carousel = document.querySelector('.carousel') as HTMLElement;
-  const dots = document.querySelectorAll('.carousel-dot');
-  const items = document.querySelectorAll('.carousel-item');
+  const carousel = document.querySelector(".carousel") as HTMLElement;
+  const dots = document.querySelectorAll(".carousel-dot");
+  const items = document.querySelectorAll(".carousel-item");
   let currentIndex = 0;
 
   function updateCarousel(index: number) {
     items.forEach((item, i) => {
-      item.classList.toggle('active', i === index);
+      item.classList.toggle("active", i === index);
     });
     dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
+      dot.classList.toggle("active", i === index);
     });
     if (carousel) {
-      carousel.style.transform = `translateX(-${(index * 500)-250}px)`;
+      carousel.style.transform = `translateX(-${index * 500 - 250}px)`;
     }
   }
 
   dots.forEach((dot, index) => {
-    dot.addEventListener('click', function() {
+    dot.addEventListener("click", function () {
       currentIndex = index;
       updateCarousel(currentIndex);
     });
