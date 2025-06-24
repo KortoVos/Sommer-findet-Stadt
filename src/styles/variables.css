@@ -17,3 +17,13 @@
 
   --max-width: 1000px;
 }
+
+@media (max-width: 767px) {
+  :root {
+    --spacing-sm: 0.25rem;
+    --spacing-md: 0.5rem;
+    --spacing-lg: 2.5rem;
+    --spacing-xl: 2rem;
+    --max-width: 100vw;
+  }
+}

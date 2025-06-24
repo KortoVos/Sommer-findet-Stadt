@@ -62,6 +62,23 @@ const navigationItems = [
   document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     const logoImage = document.querySelector('.logo-image');
+    const mobileMenuBtn = document.getElementById('mobile-menu-button');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    // Mobile menu toggle
+    if (mobileMenuBtn && mobileNav) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileNav.classList.toggle('open');
+        mobileNav.classList.toggle('hidden');
+      });
+      // Close menu on link click
+      mobileNav.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('open');
+          mobileNav.classList.add('hidden');
+        });
+      });
+    }
 
     // Smooth scroll for nav links
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .logo-link');
@@ -104,7 +121,7 @@ const navigationItems = [
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 50;
-    background: transparent;
+    background: #fff;
     transition: background 0.3s;
     /* border-bottom: 1px solid var(--color-accent); */
   }
@@ -123,6 +140,7 @@ const navigationItems = [
     display: flex;
     align-items: center;
     height: 4rem;
+    position: relative;
   }
   .logo-wrapper {
     flex-shrink: 0;
@@ -132,22 +150,52 @@ const navigationItems = [
     align-items: flex-end;
     justify-content: center;
   }
-  .logo-link {
-    text-decoration: none;
+  .mobile-menu-btn-wrapper {
+    position: absolute;
+    right: var(--spacing-md);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
   }
-  .logo-image {
-    height: 3rem;
-    width: auto;
-    transition: height 0.3s ease-in-out, transform 0.3s ease-in-out;
-    transform: translateY(0);
+  @media (max-width: 767px) {
+    .header, .header.header-scrolled {
+      background: #fff;
+    }
+    .logo-image,
+    .logo-image.logo-large,
+    .header.header-scrolled .logo-image {
+      height: 3rem !important;
+      transform: translateY(0) !important;
+    }
+    .logo-wrapper {
+      justify-content: flex-start;
+    }
+    .header-flex {
+      justify-content: flex-start;
+    }
+    .mobile-menu-btn-wrapper {
+      display: block;
+    }
   }
-  .logo-image.logo-large {
-    height: 8rem;
-    transform: translateY(3.5rem);
+  @media (min-width: 768px) {
+    .mobile-menu-btn-wrapper {
+      display: none;
+    }
   }
   .header.header-scrolled .logo-image {
     height: 3rem;
     transform: translateY(0);
+  }
+  @media (max-width: 767px) {
+    .header, .header.header-scrolled {
+      background: #fff;
+    }
+    .logo-image,
+    .logo-image.logo-large,
+    .header.header-scrolled .logo-image {
+      height: 3rem !important;
+      transform: translateY(0) !important;
+    }
   }
   .desktop-nav {
     display: none;
@@ -158,9 +206,6 @@ const navigationItems = [
       align-items: center;
       gap: var(--spacing-sm);
       position: relative;
-    }
-    .mobile-menu-btn-wrapper {
-      display: none;
     }
   }
   .nav-link {
@@ -212,7 +257,13 @@ const navigationItems = [
   .mobile-nav {
     padding-bottom: var(--spacing-md);
     transition: all 0.3s ease-in-out;
+    display: none;
+  }
+  .mobile-nav.open {
     display: block;
+  }
+  .mobile-nav.hidden {
+    display: none;
   }
   @media (min-width: 768px) {
     .mobile-nav {

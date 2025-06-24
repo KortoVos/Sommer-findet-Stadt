@@ -1,9 +1,14 @@
-
 <style>
   .highlights {
     padding: var(--spacing-xl) var(--spacing-md);
     text-align: center;
     font-family: var(--font-base);
+  }
+
+  .highlights-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
   }
 
   .event-info {
@@ -16,7 +21,6 @@
 
   .event-info-text {
     flex: 1;
-    max-width: 60%;
   }
 
   .calendar-badge {
@@ -50,9 +54,10 @@
 </style>
 
 <section id="highlights" class="highlights">
-  <div class="event-info">
-    <div class="event-info-text">
-      <h2>
+  <div class="highlights-content">
+    <div class="event-info">
+      <div class="event-info-text">
+        <h2>
        08.–10. AUGUST 2025
       </h2>
       <h3>
@@ -68,7 +73,6 @@
       <img src="./badge-save-the-date.png" alt="Jetzt im Kalender speichern" class="calendar-badge" />
     </a>
   </div>
-
   <div class="highlights-icons">
     <div class="highlight-item">
       <img src="./icon-glass.png" alt="Getränke Icon" />
@@ -82,5 +86,6 @@
       <img src="./icon-food.png" alt="Essen Icon" />
       <p>Kulinarische Genüsse</p>
     </div>
+  </div>
   </div>
 </section>

@@ -36,3 +36,16 @@ body p{
   color: var(--color-text);
   font-family: var(--font-heading);
 }
+
+@media (max-width: 767px) {
+  body,
+  body p {
+    font-size: 1.1rem;
+  }
+  h2 {
+    font-size: 2.2rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+}
