@@ -1,38 +1,67 @@
 ---
-const { images = [] } = Astro.props;
+const { images = [], id = `carousel-${Math.floor(Math.random() * 100000)}` } = Astro.props;
 ---
 
 <style>
   .carousel {
     display: flex;
-    gap: var(--spacing-md);
-    scroll-snap-type: x mandatory;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    padding-bottom: var(--spacing-md);
+    overflow: hidden;
+    width: 100%;
+    height: 550px;
+    align-items: center;
     position: relative;
-    transition: transform 0.5s ease-in-out;
-    width: max-content;
+    justify-content: center;
+  }
+  .carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
   }
   .carousel-item {
-    flex: 0 0 auto;
-    width: 500px;
-    scroll-snap-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.6);
+    width: 25%;
+    opacity: 0.5;
+    z-index: 1;
     background-color: var(--color-background);
     border-radius: var(--spacing-sm);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transform: scale(1);
-    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
   }
   .carousel-item img {
     width: 100%;
     height: auto;
     border-radius: var(--spacing-sm);
+    object-fit: cover;
+    max-height: 400px;
   }
-  .carousel-item:not(.active) {
-    transform: scale(0.8);
-    opacity: 0.6;
+  .carousel-item.center {
+    transform: translate(-50%, -50%) scale(1);
+    width: 40%;
+    opacity: 1;
+    z-index: 3;
+  }
+  .carousel-item.left, .carousel-item.right {
+    width: 25%;
+    opacity: 0.5;
+    z-index: 2;
+    filter: blur(1px);
+  }
+  .carousel-item.left {
+    transform: translate(-120%, -50%) scale(0.7);
+  }
+  .carousel-item.right {
+    transform: translate(20%, -50%) scale(0.7);
   }
   .carousel-dots {
     display: flex;
@@ -53,55 +82,64 @@ const { images = [] } = Astro.props;
   }
 </style>
 
-<div class="carousel">
-  {
-    images.map((image, index) => (
-      <div class={`carousel-item ${index === 0 ? "active" : ""}`}>
-        <img src={image} alt="Throwback Image" />
-      </div>
-    ))
-  }
-</div>
-<div class="carousel-dots">
-  {
-    images.map((_, index) => (
+<carousel-gallery id={id} images={JSON.stringify(images)}>
+  <div class="carousel" id={id}>
+    <div class="carousel-inner">
+      {images.map((image: string, index: number) => (
+        <div class="carousel-item" data-index={index}>
+          <img src={image} alt="Throwback Image" />
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="carousel-dots">
+    {images.map((_: string, index: number) => (
       <div
-        class={`carousel-dot ${index === 0 ? "active" : ""}`}
+        class="carousel-dot"
         data-index={index}
+        tabindex="0"
+        aria-label={`Go to slide ${index + 1}`}
       />
-    ))
-  }
-</div>
+    ))}
+  </div>
+</carousel-gallery>
 
-
-
-<script>
-  const carousel = document.querySelector(".carousel");
-  const dots = document.querySelectorAll(".carousel-dot");
-  const items = document.querySelectorAll(".carousel-item");
-  let currentIndex = 0;
-
-  function updateCarousel(index) {
-    items.forEach((item, i) => {
-      item.classList.toggle("active", i === index);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === index);
-    });
-    if (carousel) {
-      carousel.style.transform = `translateX(-${index * 500 - 250}px)`;
+<script type="module">
+  class Carousel extends HTMLElement {
+    connectedCallback() {
+      const root = this;
+      const inner = root.querySelector('.carousel-inner');
+      const dots = root.querySelectorAll('.carousel-dot');
+      const items = root.querySelectorAll('.carousel-item');
+      let currentIndex = 0;
+      function updateCarousel(index) {
+        items.forEach((item, i) => {
+          item.classList.remove('center', 'left', 'right');
+          if (i === index) {
+            item.classList.add('center');
+          } else if (i === (index - 1 + items.length) % items.length) {
+            item.classList.add('left');
+          } else if (i === (index + 1) % items.length) {
+            item.classList.add('right');
+          }
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', function () {
+          currentIndex = index;
+          updateCarousel(currentIndex);
+        });
+      });
+      updateCarousel(currentIndex);
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel(currentIndex);
+      }, 5000);
     }
   }
-
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", function () {
-      currentIndex = index;
-      updateCarousel(currentIndex);
-    });
-  });
-
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % items.length;
-    updateCarousel(currentIndex);
-  }, 5000);
+  customElements.define('carousel-gallery', Carousel);
 </script>
+
