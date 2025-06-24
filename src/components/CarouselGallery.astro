@@ -1,5 +1,12 @@
 ---
-const { images = [], id = `carousel-${Math.floor(Math.random() * 100000)}` } = Astro.props;
+import { parse } from 'node-html-parser'
+const { id = `carousel-${Math.floor(Math.random() * 100000)}` } = Astro.props;
+
+
+const html = await Astro.slots.render('default')
+const root = parse(html)
+const listItems = root.childNodes;
+
 ---
 
 <style>
@@ -38,7 +45,7 @@ const { images = [], id = `carousel-${Math.floor(Math.random() * 100000)}` } = A
     justify-content: center;
     transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
   }
-  .carousel-item img {
+  .carousel-item :global(*) {
     width: 100%;
     height: auto;
     border-radius: var(--spacing-sm);
@@ -82,18 +89,16 @@ const { images = [], id = `carousel-${Math.floor(Math.random() * 100000)}` } = A
   }
 </style>
 
-<carousel-gallery id={id} images={JSON.stringify(images)}>
+<carousel-gallery id={id}>
   <div class="carousel" id={id}>
     <div class="carousel-inner">
-      {images.map((image: string, index: number) => (
-        <div class="carousel-item" data-index={index}>
-          <img src={image} alt="Throwback Image" />
-        </div>
+      {listItems.map((el, index) => (
+        <div class="carousel-item" data-index={index}>{el}</div>
       ))}
     </div>
   </div>
   <div class="carousel-dots">
-    {images.map((_: string, index: number) => (
+    {listItems.map((_, index) => (
       <div
         class="carousel-dot"
         data-index={index}
@@ -142,4 +147,3 @@ const { images = [], id = `carousel-${Math.floor(Math.random() * 100000)}` } = A
   }
   customElements.define('carousel-gallery', Carousel);
 </script>
-

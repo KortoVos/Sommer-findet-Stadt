@@ -23,7 +23,11 @@ const galleryImages = [
 <section id="throwback" class="throwback">
   <h2>Throwback</h2>
   <h3>Rückblick auf die letzten Jahre</h3>
-  <CarouselGallery images={galleryImages} />
+  <CarouselGallery>
+    {galleryImages.map((src) => (
+      <img src={src} alt="Throwback Image" />
+    ))}
+  </CarouselGallery>
   <div style="display: flex; gap: var(--spacing-lg); justify-content: center; margin-top: var(--spacing-lg);">
     <AnimatedCounter target={4} label="Jahre Sommer findet Stadt" id="LitersOfWine1" />
     <AnimatedCounter target={8000} label="Besucher" id="LitersOfWine2" />
