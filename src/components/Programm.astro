@@ -26,7 +26,6 @@ const acts = [
   },
   {
     "day": "Sonntag",
-    "artist": "",
     "time": "14:00 - 19:00",
     "details": "Lounge & Chill out"
   }
@@ -59,11 +58,22 @@ const acts = [
     width: 100%;
   }
 
+  .acts-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
   .dayHeading {
     font-size: 2rem;
     font-weight: bold;
     color: var(--color-accentSecondary);
-    margin-bottom: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .acts-list > div:first-child .dayHeading {
+    margin-top: 0;
   }
 
   .artist {
@@ -105,7 +115,8 @@ const acts = [
             .filter((act) => act.day === day)
             .map((act) => (
               <li>
-                <span class="artist">{act.artist}</span><br/>
+                {act.artist && <span class="artist">{act.artist}</span>}
+                {act.artist && <br/>}
                 <span class="details">{act.time} | {act.details}</span>
               </li>
             ))}
