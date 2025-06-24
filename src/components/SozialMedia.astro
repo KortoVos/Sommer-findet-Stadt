@@ -1,0 +1,28 @@
+---
+import CarouselGallery from "./CarouselGallery.astro";
+
+const galleryImages = [
+  "./photo-festival-crowd.png",
+  "./photo-festival-crowd.png",
+  "./photo-festival-crowd.png",
+  "./photo-festival-crowd.png",
+  "./photo-festival-crowd.png",
+];
+---
+
+
+<section class="SozialMedia">
+  <div class="event-info">
+    <div class="event-info-text">
+      <h2>
+       News, Stories & mehr
+      </h2>
+      <h3>
+       Let´s stay connected!
+      </h3>
+    
+  <CarouselGallery images={galleryImages} />
+    </div>
+  </div>
+
+</section>

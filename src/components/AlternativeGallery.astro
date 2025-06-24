@@ -1,0 +1,129 @@
+---
+const { images = [], id = `carousel-${Math.floor(Math.random() * 100000)}` } = Astro.props;
+---
+
+<style>
+    .slider {
+        width: 800px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .slides {
+        display: flex;
+
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+
+        scroll-snap-points-x: repeat(300px);
+        scroll-snap-type: mandatory;
+    }
+    .slides::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+    .slides::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 10px;
+    }
+    .slides::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .slides > div {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        width: 300px;
+        height: 300px;
+        margin-right: 50px;
+        border-radius: 10px;
+        background: darkblue;
+        transform-origin: center center;
+        transform: scale(1);
+        transition: transform 0.5s;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 100px;
+    }
+    .slides > div:target {
+        /*   transform: scale(0.8); */
+    }
+    img {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .slider > a {
+        display: inline-flex;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: var(--color-primary);
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0.5rem 0.5rem;
+        position: relative;
+    }
+    .slider > a:active {
+        top: 1px;
+    }
+    .slider > a:focus {
+        background: #000;
+    }
+
+    /* Don't need button navigation */
+    /* @supports (scroll-snap-type) {
+        .slider > a {
+            display: none;
+        }
+    } */
+</style>
+
+<div class="slider">
+    <div class="slides" id={`slides-${id}`}>
+        {
+            images.map((image: string, index: number) => (
+                <div
+                    id={`slide-${id}${index}`}
+                    style="width:300px; height:300px; overflow:hidden;"
+                >
+                    <img
+                        src={image}
+                        alt="Throwback Image"
+                        style="width:100%; height:100%; object-fit:cover;"
+                    />
+                    {/* {`${index}`} */}
+                </div>
+            ))
+        }
+    </div>
+    {
+        images.map((_: string, index: number) => (
+            <a href={`#slide-${id}${index}`} class="carousel-dot" />
+        ))
+    }
+</div>
+
+
+<script>
+  document.querySelectorAll('.slides').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const id = link.getAttribute('href').substring(1);
+      const target = document.getElementById(id);
+      const slider = document.getElementById('slider');
+      slider.scrollTo({
+        left: target.offsetLeft,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>

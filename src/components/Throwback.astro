@@ -1,12 +1,13 @@
 ---
 import AnimatedCounter from "./AnimatedCounter.astro";
+import CarouselGallery from "./CarouselGallery.astro";
 
 const galleryImages = [
-  "./photo-festival-crowd.png",
-  "./photo-festival-crowd.png",
-  "./photo-festival-crowd.png",
-  "./photo-festival-crowd.png",
-  "./photo-festival-crowd.png",
+  "./gallery1.PNG",
+  "./gallery1.PNG",
+  "./gallery1.PNG",
+  "./gallery1.PNG",
+  "./gallery1.PNG",
 ];
 ---
 
@@ -17,119 +18,15 @@ const galleryImages = [
     position: relative;
     padding: var(--spacing-xl) var(--spacing-md);
   }
-
-  .carousel {
-    display: flex;
-    gap: var(--spacing-md);
-    scroll-snap-type: x mandatory;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    padding-bottom: var(--spacing-md);
-    position: relative;
-    transition: transform 0.5s ease-in-out;
-    width: max-content;
-  }
-
-  .carousel-item {
-    flex: 0 0 auto;
-    width: 500px;
-    scroll-snap-align: center;
-    background-color: var(--color-background);
-    border-radius: var(--spacing-sm);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transform: scale(1);
-    transition: transform 0.3s ease;
-  }
-
-  .carousel-item img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--spacing-sm);
-  }
-
-  .carousel-item:not(.active) {
-    transform: scale(0.8);
-    opacity: 0.6;
-  }
-
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-md);
-  }
-
-  .carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--color-text);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .carousel-dot.active {
-    background-color: var(--color-primary);
-  }
 </style>
 
 <section id="throwback" class="throwback">
   <h2>Throwback</h2>
   <h3>Rückblick auf die letzten Jahre</h3>
-  <div class="carousel">
-    {
-      galleryImages.map((image, index) => (
-        <div class={`carousel-item ${index === 0 ? "active" : ""}`}>
-          <img src={image} alt="Throwback Image" />
-        </div>
-      ))
-    }
-  </div>
-  <div class="carousel-dots">
-    {
-      galleryImages.map((_, index) => (
-        <div
-          class={`carousel-dot ${index === 0 ? "active" : ""}`}
-          data-index={index}
-        />
-      ))
-    }
-  </div>
+  <CarouselGallery images={galleryImages} />
   <div style="display: flex; gap: var(--spacing-lg); justify-content: center; margin-top: var(--spacing-lg);">
     <AnimatedCounter target={4} label="Jahre Sommer findet Stadt" id="LitersOfWine1" />
     <AnimatedCounter target={8000} label="Besucher" id="LitersOfWine2" />
     <AnimatedCounter target={600} label="Liter Wein wurden getrunken" id="LitersOfWine3" />
   </div>
 </section>
-
-<script>
-  const carousel = document.querySelector(".carousel") as HTMLElement;
-  const dots = document.querySelectorAll(".carousel-dot");
-  const items = document.querySelectorAll(".carousel-item");
-  let currentIndex = 0;
-
-  function updateCarousel(index: number) {
-    items.forEach((item, i) => {
-      item.classList.toggle("active", i === index);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("active", i === index);
-    });
-    if (carousel) {
-      carousel.style.transform = `translateX(-${index * 500 - 250}px)`;
-    }
-  }
-
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", function () {
-      currentIndex = index;
-      updateCarousel(currentIndex);
-    });
-  });
-
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % items.length;
-    updateCarousel(currentIndex);
-  }, 5000);
-</script>
