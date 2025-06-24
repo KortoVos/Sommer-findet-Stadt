@@ -1,0 +1,55 @@
+---
+const { image, user, likes, text } = Astro.props;
+---
+
+<div class="social-media-card">
+  <img class="card-image" src={image} alt={user} />
+  <div class="card-content">
+    <div class="card-user">{user}</div>
+    <div class="card-text">{text}</div>
+    <div class="card-likes">❤️ {likes}</div>
+  </div>
+</div>
+
+<style>
+.social-media-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: var(--spacing-sm);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: var(--spacing-md);
+  width: 250px;
+  min-height: 350px;
+  margin: auto;
+}
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+.card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.card-user {
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+.card-text {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+.card-likes {
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  margin-top: auto;
+}
+</style>

@@ -1,5 +1,6 @@
 ---
 import CarouselGallery from "./CarouselGallery.astro";
+import SozialMediaCard from "./SozialMediaCard.astro";
 
 const galleryImages = [
   "https://picsum.photos/seed/beach/200/800",
@@ -8,26 +9,56 @@ const galleryImages = [
   "https://picsum.photos/seed/park/200/800",
   "https://picsum.photos/seed/river/200/800",
 ];
----
 
+const socialMediaList = [
+  {
+    image: "https://picsum.photos/seed/beach/400/300",
+    user: "@beachlover",
+    likes: 120,
+    text: "Sonne, Sand und Meer! #beachlife",
+  },
+  {
+    image: "https://picsum.photos/seed/mountain/400/300",
+    user: "@mountainhiker",
+    likes: 98,
+    text: "Wandern in den Bergen ist das Beste!",
+  },
+  {
+    image: "https://picsum.photos/seed/city/400/300",
+    user: "@cityexplorer",
+    likes: 210,
+    text: "Stadtlichter und Abenteuer. #citylife",
+  },
+  {
+    image: "https://picsum.photos/seed/park/400/300",
+    user: "@parklife",
+    likes: 77,
+    text: "Chillen im Park mit Freunden.",
+  },
+  {
+    image: "https://picsum.photos/seed/river/400/300",
+    user: "@riverdreamer",
+    likes: 134,
+    text: "Bootstour auf dem Fluss!",
+  },
+];
+---
 
 <section class="SozialMedia">
   <div class="event-info">
     <div class="event-info-text">
-      <h2>
-       News, Stories & mehr
-      </h2>
-      <h3>
-       Let´s stay connected!
-      </h3>
-    
-  
+      <h2>News, Stories & mehr</h2>
+      <h3>Let´s stay connected!</h3>
+
       <CarouselGallery>
-        <img src="..." />
+        {
+          socialMediaList.map((card) => (
+            <div>
+              <SozialMediaCard {...card} />
+            </div>
+          ))
+        }
       </CarouselGallery>
-
-
     </div>
   </div>
-
 </section>
