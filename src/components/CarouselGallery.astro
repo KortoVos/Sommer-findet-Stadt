@@ -44,7 +44,7 @@ const listItems = root.childNodes;
     transition: all 0.5s cubic-bezier(0.4,0,0.2,1);
   }
   .carousel-item :global(*) {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     border-radius: var(--spacing-sm);
     object-fit: cover;
@@ -139,7 +139,7 @@ const listItems = root.childNodes;
       updateCarousel(currentIndex);
       setInterval(() => {
         currentIndex = (currentIndex + 1) % items.length;
-        // updateCarousel(currentIndex);
+        updateCarousel(currentIndex);
       }, 5000);
     }
   }

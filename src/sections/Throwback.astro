@@ -23,15 +23,16 @@ const galleryImages = [
   .counters-container {
     display: flex;
     gap: var(--spacing-lg);
-    justify-content: center;
+    justify-content: space-around;
     margin-top: var(--spacing-lg);
     flex-wrap: wrap;
   }
-  .counters-container :global(.animated-counter) {
+  .counter-wrapper {
+    width: 30%;
     min-width: 120px;
     max-width: 180px;
-    flex: 1 1 120px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
   }
   @media (max-width: 767px) {
     .counters-container {
@@ -39,10 +40,10 @@ const galleryImages = [
       align-items: center;
       gap: var(--spacing-md);
     }
-    .counters-container :global(.animated-counter) {
+    .counter-wrapper {
+      width: 100%;
       min-width: 0;
       max-width: 100%;
-      width: 100%;
     }
   }
 </style>
@@ -56,8 +57,14 @@ const galleryImages = [
     ))}
   </CarouselGallery>
   <div class="counters-container">
-    <AnimatedCounter target={4} label="Jahre Sommer findet Stadt" id="LitersOfWine1" />
-    <AnimatedCounter target={8000} label="Besucher" id="LitersOfWine2" />
-    <AnimatedCounter target={600} label="Liter Wein wurden getrunken" id="LitersOfWine3" />
+    <div class="counter-wrapper">
+      <AnimatedCounter target={4} label="Jahre Sommer findet Stadt" id="LitersOfWine1" />
+    </div>
+    <div class="counter-wrapper">
+      <AnimatedCounter target={8000} label="Besucher" id="LitersOfWine2" />
+    </div>
+    <div class="counter-wrapper">
+      <AnimatedCounter target={600} label="Liter Wein wurden getrunken" id="LitersOfWine3" />
+    </div>
   </div>
 </section>
