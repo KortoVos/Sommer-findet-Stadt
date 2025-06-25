@@ -66,11 +66,15 @@ const { target = 100, label = "Example text" } = Astro.props;
   }
 
   .counter-number {
-    width: 1.5em;
-    font-size: 5rem;
+    min-width: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
     font-family: var(--font-heading);
     color: var(--color-accent);
     font-weight: bold;
+    text-align: center;
   }
 
   .counter-label {

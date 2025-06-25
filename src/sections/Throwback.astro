@@ -18,6 +18,34 @@ const galleryImages = [
     position: relative;
     padding: var(--spacing-xl) var(--spacing-md);
   }
+  .galleryImage{
+    width: 250px;
+  }
+  .counters-container {
+    display: flex;
+    gap: var(--spacing-lg);
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+  .counters-container :global(.animated-counter) {
+    min-width: 120px;
+    max-width: 180px;
+    flex: 1 1 120px;
+    text-align: center;
+  }
+  @media (max-width: 767px) {
+    .counters-container {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    .counters-container :global(.animated-counter) {
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
 </style>
 
 <section id="throwback" class="throwback">
@@ -25,10 +53,10 @@ const galleryImages = [
   <h3>Rückblick auf die letzten Jahre</h3>
   <CarouselGallery height="350px">
     {galleryImages.map((src) => (
-      <img src={src} alt="Throwback Image" />
+      <img src={src} alt="Throwback Image" class="galleryImage" />
     ))}
   </CarouselGallery>
-  <div style="display: flex; gap: var(--spacing-lg); justify-content: center; margin-top: var(--spacing-lg);">
+  <div class="counters-container">
     <AnimatedCounter target={4} label="Jahre Sommer findet Stadt" id="LitersOfWine1" />
     <AnimatedCounter target={8000} label="Besucher" id="LitersOfWine2" />
     <AnimatedCounter target={600} label="Liter Wein wurden getrunken" id="LitersOfWine3" />
