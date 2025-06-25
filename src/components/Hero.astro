@@ -1,9 +1,12 @@
 <style>
   .hero {
-    background: url('/photo-festival-crowd.png') no-repeat center center;
+    background: url('/photo-festival-crowd.png') no-repeat center bottom;
     background-size: cover;
-    width: 100%; /* Use 100% instead of 100vw to avoid horizontal scroll */
-    height: 100vh;
+    width: 100vw;
+    height: 86vh;
+    /* Ensure no horizontal scroll */
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 </style>
 <section id="home" class="hero">

@@ -83,8 +83,8 @@ const navigationItems = [
     // Smooth scroll for nav links
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .logo-link');
     navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
+      link.addEventListener('click', function(e: Event) {
+        const href = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
         if (href && href.startsWith('#')) {
           // Special case for #home: scroll to top smoothly
           if (href === '#home') {
@@ -103,6 +103,7 @@ const navigationItems = [
 
     // Header background on scroll
     const handleScroll = () => {
+      if (!header) return;
       if (window.scrollY === 0) {
         header.classList.remove('header-scrolled');
         if (logoImage) logoImage.classList.add('logo-large');
@@ -123,14 +124,16 @@ const navigationItems = [
     z-index: 50;
     background: #fff;
     transition: background 0.3s;
+    transition: box-shadow 0.5s;
     /* border-bottom: 1px solid var(--color-accent); */
   }
   .header.header-scrolled {
     background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
   .header-container {
     max-width: var(--max-width);
+    margin: 0 auto;
   }
   .header-flex {
     justify-content: center;
@@ -160,6 +163,7 @@ const navigationItems = [
     }
     .logo-image {
       height: 3rem;
+      margin-left: 1em;
       transform: translateY(0);
     }
     .logo-image.logo-large {

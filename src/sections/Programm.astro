@@ -90,18 +90,50 @@ const acts = [
     .programm {
       flex-direction: column;
       align-items: center;
+      gap: 0px;
     }
-
     .acts-list {
-      order: -1;
       max-width: 100%;
     }
-
     .lineup-image {
-      max-width: 100%;
+      max-width: 70%;
+      margin-bottom: -7em;
+    }
+  }
+
+  .animate-slide-right {
+    animation: slideRight 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+  @keyframes slideRight {
+    from {
+      transform: translate(0,0);
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    to {
+      transform: translate(40px,20px);
+      opacity: 1;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lineupImage = document.querySelector('.lineup-image');
+    if (!lineupImage) return;
+    let hasAnimated = false;
+    const observer = new window.IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          lineupImage.classList.add('animate-slide-right');
+          hasAnimated = true;
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(lineupImage);
+  });
+</script>
 
 <section id="programm" class="programm">
   <div class="lineup-image">

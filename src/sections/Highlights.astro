@@ -17,6 +17,7 @@
     align-items: center;
     flex-wrap: wrap;
     text-align: left;
+    position: relative;
   }
 
   .event-info-text {
@@ -26,8 +27,12 @@
   .calendar-badge {
     flex: 1;
     margin-top: var(--spacing-md);
-    width: 80%;
+    width: 100%;
     cursor: pointer;
+    max-width: 320px;
+    min-width: 160px;
+    display: block;
+    transition: max-width 0.3s, min-width 0.3s, width 0.3s;
   }
 
   .highlights-icons {
@@ -51,41 +56,127 @@
     margin-bottom: var(--spacing-sm);
   }
 
+  /* Hide/show badges based on screen size */
+  .mobile-badge { display: none; }
+  .desktop-badge-link { display: block; }
+  @media (max-width: 767px) {
+    .event-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .calendar-badge {
+      width: 50vw;
+      max-width: 200px;
+      min-width: 60px;
+      order: 2;
+      align-self: flex-end;
+      margin: var(--spacing-lg) 0 var(--spacing-lg) auto;
+    }
+    .event-info-text {
+      order: 1;
+    }
+    .event-info-text h2,
+    .event-info-text h3 {
+      margin-bottom: 0.5rem;
+    }
+    .event-info-text p {
+      margin-top: 0.5rem;
+    }
+    .mobile-badge { display: block; align-self: center; margin-left: auto; margin-right: auto;}
+    .desktop-badge-link { display: none; }
+  }
+
+  .badge-pulse-animate {
+    animation: badgePulse 1.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  .badge-pulse-loop {
+    animation: badgePulseLoop 2.5s cubic-bezier(.35,0,.7,1) infinite;
+  }
+  @keyframes badgePulse {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(0.85);
+    }
+    60% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes badgePulseLoop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.98);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileBadge = document.querySelector('.mobile-badge');
+    if (!mobileBadge) return;
+    let hasAnimated = false;
+    const observer = new window.IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          mobileBadge.classList.add('badge-pulse-animate');
+          hasAnimated = true;
+          setTimeout(() => {
+            mobileBadge.classList.remove('badge-pulse-animate');
+            mobileBadge.classList.add('badge-pulse-loop');
+          }, 1200);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(mobileBadge);
+  });
+</script>
 
 <section id="highlights" class="highlights">
   <div class="highlights-content">
     <div class="event-info">
       <div class="event-info-text">
         <h2>
-       08.–10. AUGUST 2025
-      </h2>
-      <h3>
-       Marktplatz Troisdorf-Sieglar
-      </h3>
-      <p>
-        Zwei Tage voller Genuss, Musik und Sommerflair: <br />
-        Sommer findet Stadt verwandelt den Sieglarer Marktplatz in eine kleine Festivaloase. <br />
-        Feine Weine, schmackofatze Speisen, Live-Musik und lauschige Plätze laden zum Verweilen ein.
-      </p>
+         08.–10. AUGUST 2025
+        </h2>
+        <h3>
+         Marktplatz Troisdorf-Sieglar
+        </h3>
+        <!-- Badge for mobile, shown between h3 and p -->
+        <img src="./badge-save-the-date.png" alt="Jetzt im Kalender speichern" class="calendar-badge mobile-badge" />
+        <p>
+          Zwei Tage voller Genuss, Musik und Sommerflair: <br />
+          Sommer findet Stadt verwandelt den Sieglarer Marktplatz in eine kleine Festivaloase. <br />
+          Feine Weine, schmackofatze Speisen, Live-Musik und lauschige Plätze laden zum Verweilen ein.
+        </p>
+      </div>
+      <!-- Badge for desktop, stays on the right -->
+      <a href="/calendar.ics" download class="desktop-badge-link">
+        <img src="./badge-save-the-date.png" alt="Jetzt im Kalender speichern" class="calendar-badge desktop-badge" />
+      </a>
     </div>
-    <a href="/calendar.ics" download>
-      <img src="./badge-save-the-date.png" alt="Jetzt im Kalender speichern" class="calendar-badge" />
-    </a>
-  </div>
-  <div class="highlights-icons">
-    <div class="highlight-item">
-      <img src="./icon-glass.png" alt="Getränke Icon" />
-      <p>Feine Weine</p>
+    <div class="highlights-icons">
+      <div class="highlight-item">
+        <img src="./icon-glass.png" alt="Getränke Icon" />
+        <p>Feine Weine</p>
+      </div>
+      <div class="highlight-item">
+        <img src="./icon-music.png" alt="Musik Icon" />
+        <p>Live-Musik</p>
+      </div>
+      <div class="highlight-item">
+        <img src="./icon-food.png" alt="Essen Icon" />
+        <p>Kulinarische Genüsse</p>
+      </div>
     </div>
-    <div class="highlight-item">
-      <img src="./icon-music.png" alt="Musik Icon" />
-      <p>Live-Musik</p>
-    </div>
-    <div class="highlight-item">
-      <img src="./icon-food.png" alt="Essen Icon" />
-      <p>Kulinarische Genüsse</p>
-    </div>
-  </div>
   </div>
 </section>
