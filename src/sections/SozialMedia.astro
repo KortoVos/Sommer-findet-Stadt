@@ -44,13 +44,13 @@ const socialMediaList = [
 ];
 ---
 
-<section id="social" class="SozialMedia">
+<section id="social" class="SozialMedia" style={`--carousel-height: 420px;`}>
   <div class="event-info">
     <div class="event-info-text">
       <h2>News, Stories & mehr</h2>
       <h3>Let´s stay connected!</h3>
 
-      <CarouselGallery height="420px">
+      <CarouselGallery >
         {
           socialMediaList.map((card) => (
             <div>

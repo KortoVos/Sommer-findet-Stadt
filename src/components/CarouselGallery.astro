@@ -1,6 +1,6 @@
 ---
 import { parse } from 'node-html-parser'
-const { id = `carousel-${Math.floor(Math.random() * 100000)}`, height = '550px' } = Astro.props;
+const { id = `carousel-${Math.floor(Math.random() * 100000)}` } = Astro.props;
 
 
 const html = await Astro.slots.render('default')
@@ -87,7 +87,7 @@ const listItems = root.childNodes;
   }
 </style>
 
-<carousel-gallery id={id} style={`--carousel-height: ${height}`}> 
+<carousel-gallery id={id} > 
   <div class="carousel" id={id}>
     <div class="carousel-inner">
       {listItems.map((el, index) => (

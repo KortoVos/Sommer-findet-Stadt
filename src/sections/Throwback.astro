@@ -16,9 +16,10 @@ const galleryImages = [
     overflow: hidden;
     position: relative;
     padding: var(--spacing-xl) var(--spacing-md);
+    --carousel-height: 150px;
   }
   .galleryImage{
-    width: 250px;
+    width: 450px;
   }
   .counters-container {
     display: flex;
@@ -30,9 +31,10 @@ const galleryImages = [
   .counter-wrapper {
     width: 30%;
     min-width: 120px;
-    max-width: 180px;
+    max-width: 230px;
     display: flex;
     justify-content: center;
+    text-align: center;
   }
   @media (max-width: 767px) {
     .counters-container {
@@ -46,12 +48,17 @@ const galleryImages = [
       max-width: 100%;
     }
   }
+  @media (min-width: 480px) {
+    .throwback {
+      --carousel-height: 350px;
+    }
+  }
 </style>
 
-<section id="throwback" class="throwback">
+<section id="throwback" class="throwback" >
   <h2>Throwback</h2>
   <h3>Rückblick auf die letzten Jahre</h3>
-  <CarouselGallery height="350px">
+  <CarouselGallery >
     {galleryImages.map((src) => (
       <img src={src} alt="Throwback Image" class="galleryImage" />
     ))}
