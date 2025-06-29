@@ -1,20 +1,5 @@
 ---
-const logos = [
-  { src: './logo-sommer-findet-stadt.png', alt: 'Sommer findet Stadt Logo', link: 'https://sommerfindetstadt.de' },
-  { src: './icon-facebook.png', alt: 'Facebook', link: 'https://facebook.com' },
-  { src: './icon-instagram.png', alt: 'Instagram', link: 'https://instagram.com' },
-  { src: './icon-music.png', alt: 'Music' },
-  { src: 'https://picsum.photos/seed/sunshine/800/500', alt: 'Sunshine', link: 'https://example.com/sunshine' },
-  { src: 'https://picsum.photos/seed/sky/800/500', alt: 'Sky' },
-  { src: 'https://picsum.photos/seed/party/800/500', alt: 'Party', link: 'https://example.com/party' },
-  { src: 'https://picsum.photos/seed/festival/800/500', alt: 'Festival' },
-  { src: 'https://picsum.photos/seed/forest/800/500', alt: 'Forest', link: 'https://example.com/forest' },
-  { src: 'https://picsum.photos/seed/river/800/500', alt: 'River' },
-  { src: 'https://picsum.photos/seed/flower/800/500', alt: 'Flower', link: 'https://example.com/flower' },
-  { src: 'https://picsum.photos/seed/tree/800/500', alt: 'Tree' },
-  { src: 'https://picsum.photos/seed/people/800/500', alt: 'People', link: 'https://example.com/people' },
-  { src: 'https://picsum.photos/seed/city/800/500', alt: 'City' },
-];
+import logos from '../data/footerLogos.js';
 ---
 <style>
 footer {
@@ -32,12 +17,25 @@ footer {
   padding: 0;
   margin: 0;
 }
-.footer-logos {
+.footer-logos-desktop {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 4.5rem;
-  padding: 3rem 0;
+  align-items: center;
+}
+.footer-logos-mobile {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .footer-logos-desktop {
+    display: none;
+  }
+  .footer-logos-mobile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4.5rem;
+    padding: 3rem 0;
+  }
 }
 .footer-logo {
   display: flex;
@@ -54,6 +52,17 @@ footer {
   height: auto;
   display: block;
 }
+.footer-logos-desktop .footer-logo {
+  width: 1000px;
+  max-width: 1000px;
+  height: auto;
+}
+.footer-logos-desktop .footer-logo img {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  max-height: none;
+}
 </style>
 <footer>
   <svg
@@ -69,7 +78,14 @@ footer {
     />
   </svg>
   <div class="footer-content">
-    <div class="footer-logos">
+    <!-- Desktop: Only Ansicht.png -->
+    <div class="footer-logos-desktop">
+      <div class="footer-logo">
+        <img src="/Logos/Ansicht.png" alt="Ansicht" />
+      </div>
+    </div>
+    <!-- Mobile: All logos -->
+    <div class="footer-logos-mobile">
       {logos.map(logo => (
         logo.link ? (
           <div class="footer-logo"><a href={logo.link} target="_blank" rel="noopener"><img src={logo.src} alt={logo.alt} /></a></div>

@@ -1,46 +1,10 @@
 ---
 import CarouselGallery from "./../components/CarouselGallery.astro";
-import SozialMediaCard from "./../components/SozialMediaCard.astro";
 
 const galleryImages = [
-  "https://picsum.photos/seed/beach/200/800",
-  "https://picsum.photos/seed/mountain/200/800",
-  "https://picsum.photos/seed/city/200/800",
-  "https://picsum.photos/seed/park/200/800",
-  "https://picsum.photos/seed/river/200/800",
-];
-
-const socialMediaList = [
-  {
-    image: "https://picsum.photos/seed/beach/400/300",
-    user: "@beachlover",
-    likes: 120,
-    text: "Sonne, Sand und Meer! #beachlife",
-  },
-  {
-    image: "https://picsum.photos/seed/mountain/400/300",
-    user: "@mountainhiker",
-    likes: 98,
-    text: "Wandern in den Bergen ist das Beste!",
-  },
-  {
-    image: "https://picsum.photos/seed/city/400/300",
-    user: "@cityexplorer",
-    likes: 210,
-    text: "Stadtlichter und Abenteuer. #citylife",
-  },
-  {
-    image: "https://picsum.photos/seed/park/400/300",
-    user: "@parklife",
-    likes: 77,
-    text: "Chillen im Park mit Freunden.",
-  },
-  {
-    image: "https://picsum.photos/seed/river/400/300",
-    user: "@riverdreamer",
-    likes: 134,
-    text: "Bootstour auf dem Fluss!",
-  },
+  "/Bilder Insta Beitrag/IG-Beitrag-01.png",
+  "/Bilder Insta Beitrag/IG-Beitrag-02.png",
+  "/Bilder Insta Beitrag/IG-Beitrag-03.png",
 ];
 ---
 
@@ -50,23 +14,27 @@ const socialMediaList = [
       <h2>News, Stories & mehr</h2>
       <h3>Let´s stay connected!</h3>
 
-      <CarouselGallery >
-        {
-          socialMediaList.map((card) => (
-            <div>
-              <SozialMediaCard {...card} />
-            </div>
-          ))
-        }
+      <CarouselGallery>
+        {galleryImages.map((src) => (
+          <img src={src} alt="Social Media Beitrag" class="galleryImage" />
+        ))}
       </CarouselGallery>
     </div>
   </div>
 </section>
 
 <style>
-.SozialMedia {
+  .SozialMedia {
     padding: var(--spacing-xl) var(--spacing-md);
     flex-wrap: wrap;
     gap: var(--spacing-lg);
+  }
+  .galleryImage {
+    width: 230px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
   }
 </style>
