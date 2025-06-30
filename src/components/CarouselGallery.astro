@@ -144,23 +144,36 @@ const listItems = root.childNodes;
 
       // Touch/swipe support for mobile
       let startX = 0;
+      let startY = 0;
       let isTouching = false;
+      let isSwiping = false;
       inner.addEventListener('touchstart', function(e) {
         if (e.touches.length === 1) {
           startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
           isTouching = true;
+          isSwiping = false;
         }
       });
       inner.addEventListener('touchmove', function(e) {
         if (!isTouching) return;
-        // Prevent scrolling while swiping
-        e.preventDefault();
+        const moveX = e.touches[0].clientX - startX;
+        const moveY = e.touches[0].clientY - startY;
+        if (!isSwiping && Math.abs(moveX) > 20 && Math.abs(moveX) > Math.abs(moveY)) {
+          isSwiping = true;
+        }
+        if (isSwiping) {
+          // Only prevent default if horizontal swipe
+          e.preventDefault();
+        }
       }, { passive: false });
       inner.addEventListener('touchend', function(e) {
         if (!isTouching) return;
         const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
         const diffX = endX - startX;
-        if (Math.abs(diffX) > 40) { // swipe threshold
+        const diffY = endY - startY;
+        if (isSwiping && Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
           if (diffX < 0) {
             // swipe left
             currentIndex = (currentIndex + 1) % items.length;
@@ -171,6 +184,7 @@ const listItems = root.childNodes;
           updateCarousel(currentIndex);
         }
         isTouching = false;
+        isSwiping = false;
       });
     }
   }
