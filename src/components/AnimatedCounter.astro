@@ -1,8 +1,8 @@
 ---
-const { target = 100, label = "Example text" } = Astro.props;
+const { target = 100, label = "Example text", suffix = "" } = Astro.props;
 ---
 
-<animated-counter data-target={target} data-label={label}>
+<animated-counter data-target={target} data-label={label} data-suffix={suffix}>
   <div class="counter-container">
     <div class="counter-number">0</div>
     <div class="counter-label">{label}</div>
@@ -13,25 +13,26 @@ const { target = 100, label = "Example text" } = Astro.props;
   class AnimatedCounter extends HTMLElement {
     connectedCallback() {
       const target = parseInt(this.getAttribute('data-target') ?? '0', 10) || 0;
+      const suffix = this.getAttribute('data-suffix') || "";
       const numberEl = this.querySelector('.counter-number');
       let hasAnimated = false;
       const duration = 2000; // ms
       const start = 0;
-      const easeOutQuad = (t: number) => t * (2 - t); // Ease out function
-      const animate = (startTime: number) => {
+      const easeOutQuad = (t) => t * (2 - t); // Ease out function
+      const animate = (startTime) => {
         const now = performance.now();
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const eased = easeOutQuad(progress);
         const value = Math.floor(start + (target - start) * eased);
         if (numberEl) {
-          numberEl.textContent = value.toLocaleString();
+          numberEl.textContent = value.toLocaleString() + suffix;
         }
         if (progress < 1) {
           requestAnimationFrame(() => animate(startTime));
         } else {
           if (numberEl) {
-            numberEl.textContent = target.toLocaleString();
+            numberEl.textContent = target.toLocaleString() + suffix;
           }
         }
       };
