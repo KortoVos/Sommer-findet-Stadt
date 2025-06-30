@@ -1,0 +1,130 @@
+---
+// CSS-only popup for Impressum, works without JS
+---
+
+<style>
+    .impressum-popup-toggle {
+        cursor: pointer;
+        color: var(--color-primary, #ea506e);
+        text-decoration: underline;
+        background: none;
+        border: none;
+        font: inherit;
+        padding: 0;
+    }
+
+    .impressum-popup-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+    }
+
+    .impressum-popup-modal:target {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .impressum-popup-content {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 90vw;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+
+    .impressum-popup-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        text-decoration: none;
+        font-size: 2rem;
+        color: #888;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+
+<a href="#impressum-popup" class="impressum-popup-toggle">Impressum</a>
+
+<div
+    id="impressum-popup"
+    class="impressum-popup-modal"
+    tabindex="-1"
+    aria-modal="true"
+    role="dialog"
+>
+    <div class="impressum-popup-content">
+        <a href="#" class="impressum-popup-close" aria-label="Schließen"
+            >&times;</a
+        >
+        <h2>Impressum</h2>
+        <p><strong>Die Weinquelle GmbH</strong><br>
+        Langbaurghstraße 6<br>
+        53842 Troisdorf<br>
+        Handelsregister: B 14565<br>
+        Registergericht: Siegburg<br>
+        Vertreten durch: Björn Gerhard</p>
+        <p>
+        <strong>Kontakt</strong><br>
+        Telefon: 0 22 41/25 27 02-0<br>
+        E-Mail: info@die-weinquelle.de
+        </p>
+        <p>
+        <strong>Umsatzsteuer-ID</strong><br>
+        Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE 220338340
+        </p>
+        <p>
+        <strong>Angaben zur Berufs­haftpflicht­versicherung</strong><br>
+        Name und Sitz des Versicherers: Provinzial Rheinland Versicherung AG<br>
+        40195 Düsseldorf<br>
+        Geltungsraum der Versicherung: Deutschland
+        </p>
+        <p>
+        <strong>EU-Streitschlichtung</strong><br>
+        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br>
+        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a><br>
+        Unsere E-Mail-Adresse finden Sie oben im Impressum.<br>
+        Verbraucher­streit­beilegung/Universal­schlichtungs­stelle:<br>
+        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.<br>
+        Wichtiger Hinweis: Die Plattform zur Online-Streitbeilegung (OS) wird zum 20.7.2025 endgültig eingestellt. Die Einreichung von Beschwerden auf der OS-Plattform wird daher bereits am 20.3.2025 eingestellt.
+        </p>
+        <hr>
+        <p><strong>Verantwortlich:</strong><br>
+        Sternberg Audio<br>
+        Fabian Sternberg<br>
+        Marktplatz 17<br>
+        53844 Troisdorf</p>
+        <p>
+        <strong>Kontakt</strong><br>
+        Telefon: 01523/4123771<br>
+        E-Mail: Kontakt@sternberg-audio.de
+        </p>
+        <p>
+        <strong>Umsatzsteuer-ID</strong><br>
+        Umsatzsteuer-Identifikationsnummer: DE308658547
+        </p>
+        <p>
+        <strong>Steuernummer</strong><br>
+        220/5454/4260
+        </p>
+        <p>
+        <strong>Aufsichtsbehörde</strong><br>
+        Amtsgericht Siegburg
+        </p>
+        <hr>
+        <p style="font-size:0.95em;color:#666;">
+        <strong>Haftungshinweis:</strong> Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+        </p>
+    </div>
+</div>

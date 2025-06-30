@@ -1,68 +1,70 @@
 ---
-import logos from '../data/footerLogos.js';
+import logos from "../data/footerLogos.js";
+import ImpressumPopup from "../components/ImpressumPopup.astro";
 ---
+
 <style>
-footer {
-  padding: 0;
-  text-align: center;
-}
-.footer-wave {
-  width: 100%;
-  display: block;
-  line-height: 0;
-  margin-bottom: -1px;
-}
-.footer-content {
-  background-color: #fff;
-  padding: 0;
-  margin: 0;
-}
-.footer-logos-desktop {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.footer-logos-mobile {
-  display: none;
-}
-@media (max-width: 1023px) {
+  footer {
+    padding: 0;
+    text-align: center;
+  }
+  .footer-wave {
+    width: 100%;
+    display: block;
+    line-height: 0;
+    margin-bottom: -1px;
+  }
+  .footer-content {
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+  }
   .footer-logos-desktop {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .footer-logos-mobile {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4.5rem;
-    padding: 3rem 0;
+    display: none;
   }
-}
-.footer-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-  max-width: 220px;
-  margin: 0;
-}
-.footer-logo img {
-  max-height: 120px;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  display: block;
-}
-.footer-logos-desktop .footer-logo {
-  width: 1000px;
-  max-width: 1000px;
-  height: auto;
-}
-.footer-logos-desktop .footer-logo img {
-  width: 100%;
-  max-width: 1000px;
-  height: auto;
-  max-height: none;
-}
+  @media (max-width: 1023px) {
+    .footer-logos-desktop {
+      display: none;
+    }
+    .footer-logos-mobile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4.5rem;
+      padding: 3rem 0;
+    }
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    max-width: 220px;
+    margin: 0;
+  }
+  .footer-logo img {
+    max-height: 120px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+  }
+  .footer-logos-desktop .footer-logo {
+    width: 1000px;
+    max-width: 1000px;
+    height: auto;
+  }
+  .footer-logos-desktop .footer-logo img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    max-height: none;
+  }
 </style>
 <footer>
   <svg
@@ -74,8 +76,7 @@ footer {
   >
     <path
       d="M0,0 C240,60 480,20 720,60 C960,100 1200,20 1440,60 L1440,80 L0,80 Z"
-      fill="#ffffff"
-    />
+      fill="#ffffff"></path>
   </svg>
   <div class="footer-content">
     <!-- Desktop: Only Ansicht.png -->
@@ -86,13 +87,26 @@ footer {
     </div>
     <!-- Mobile: All logos -->
     <div class="footer-logos-mobile">
-      {logos.map(logo => (
-        logo.link ? (
-          <div class="footer-logo"><a href={logo.link} target="_blank" rel="noopener"><img src={logo.src} alt={logo.alt} /></a></div>
-        ) : (
-          <div class="footer-logo"><img src={logo.src} alt={logo.alt} /></div>
+      {
+        logos.map((logo) =>
+          logo.link ? (
+            <div class="footer-logo">
+              <a href={logo.link} target="_blank" rel="noopener">
+                <img src={logo.src} alt={logo.alt} />
+              </a>
+            </div>
+          ) : (
+            <div class="footer-logo">
+              <img src={logo.src} alt={logo.alt} />
+            </div>
+          ),
         )
-      ))}
+      }
+    </div>
+    <div
+      style="float: right; align-items: center; justify-content: center; padding: 1rem;"
+    >
+      <ImpressumPopup />
     </div>
   </div>
 </footer>
