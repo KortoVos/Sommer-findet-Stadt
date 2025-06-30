@@ -141,6 +141,37 @@ const listItems = root.childNodes;
         currentIndex = (currentIndex + 1) % items.length;
         updateCarousel(currentIndex);
       }, 5000);
+
+      // Touch/swipe support for mobile
+      let startX = 0;
+      let isTouching = false;
+      inner.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+          startX = e.touches[0].clientX;
+          isTouching = true;
+        }
+      });
+      inner.addEventListener('touchmove', function(e) {
+        if (!isTouching) return;
+        // Prevent scrolling while swiping
+        e.preventDefault();
+      }, { passive: false });
+      inner.addEventListener('touchend', function(e) {
+        if (!isTouching) return;
+        const endX = e.changedTouches[0].clientX;
+        const diffX = endX - startX;
+        if (Math.abs(diffX) > 40) { // swipe threshold
+          if (diffX < 0) {
+            // swipe left
+            currentIndex = (currentIndex + 1) % items.length;
+          } else {
+            // swipe right
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+          }
+          updateCarousel(currentIndex);
+        }
+        isTouching = false;
+      });
     }
   }
   customElements.define('carousel-gallery', Carousel);
