@@ -24,7 +24,7 @@ function main() {
   }
   const files = fs.readdirSync(logosDir).filter(f => /\.(png|jpe?g|svg)$/i.test(f));
   const logos = files.map(filename => {
-    const src = `/Logos/${filename}`;
+    const src = `./Logos/${filename}`;
     let width = 1, height = 1, aspect = 1;
     const ext = path.extname(filename).toLowerCase();
     if (ext === '.svg') {
