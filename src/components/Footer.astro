@@ -35,25 +35,32 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 4.5rem;
-      padding: 3rem 0;
+      gap: 5px;
+    }
+    .footer-logo-half {
+      width: 50%;
+      max-width: 45%;
+    }
+    .footer-logo-wide {
+      width: 100%;
+      max-width: 100%;
+      flex: 0 0 100%;
     }
   }
   .footer-logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 120px;
-    max-width: 220px;
-    margin: 0;
+    padding: 5px;
   }
   .footer-logo img {
     max-height: 120px;
-    max-width: 100%;
+    max-width: 90%;
     width: auto;
     height: auto;
     display: block;
   }
+
   .footer-logos-desktop .footer-logo {
     width: 1000px;
     max-width: 1000px;
@@ -82,26 +89,25 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
     <!-- Desktop: Only Ansicht.png -->
     <div class="footer-logos-desktop">
       <div class="footer-logo">
-        <img src="./Logos/Ansicht.png" alt="Ansicht" />
+        <img src="./Ansicht.png" alt="Ansicht" />
       </div>
     </div>
-    <!-- Mobile: All logos -->
+    <!-- Mobile: All logos, dynamic width and grouping -->
     <div class="footer-logos-mobile">
-      {
-        logos.map((logo) =>
-          logo.link ? (
-            <div class="footer-logo">
-              <a href={logo.link} target="_blank" rel="noopener">
-                <img src={logo.src} alt={logo.alt} />
-              </a>
-            </div>
-          ) : (
-            <div class="footer-logo">
+      {logos.map((logo) => {
+        const widthClass = logo.aspect > 3 ? 'footer-logo-wide' : 'footer-logo-half';
+        return logo.link ? (
+          <div class={`footer-logo ${widthClass}`}>
+            <a href={logo.link} target="_blank" rel="noopener">
               <img src={logo.src} alt={logo.alt} />
-            </div>
-          ),
-        )
-      }
+            </a>
+          </div>
+        ) : (
+          <div class={`footer-logo ${widthClass}`}>
+            <img src={logo.src} alt={logo.alt} />
+          </div>
+        );
+      })}
     </div>
     <div
       style="float: right; align-items: center; justify-content: center; padding: 1rem;"
