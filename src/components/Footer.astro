@@ -72,6 +72,14 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
     height: auto;
     max-height: none;
   }
+  .footer-logos-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 2.2rem;
+    color: var(--color-primary);
+  }
 </style>
 <footer>
   <svg
@@ -85,7 +93,10 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
       d="M0,0 C240,60 480,20 720,60 C960,100 1200,20 1440,60 L1440,80 L0,80 Z"
       fill="#ffffff"></path>
   </svg>
+
+  
   <div class="footer-content">
+      <div class="footer-logos-header">Präsentiert von:</div>
     <!-- Desktop: Only Ansicht.png -->
     <div class="footer-logos-desktop">
       <div class="footer-logo">
