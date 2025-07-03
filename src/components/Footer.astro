@@ -54,8 +54,8 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
     padding: 5px;
   }
   .footer-logo img {
-    max-height: 120px;
-    max-width: 90%;
+    max-height: 140px;
+    max-width: 100%;
     width: auto;
     height: auto;
     display: block;
@@ -74,7 +74,7 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
   }
   .footer-logos-header {
     width: 100%;
-    text-align: center;
+    text-align: left;
     margin-bottom: 1rem;
     font-weight: bold;
     font-size: 2.2rem;
@@ -94,9 +94,12 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
       fill="#ffffff"></path>
   </svg>
 
-  
   <div class="footer-content">
+    <div style=" max-width: var(--max-width);
+        margin: 0 auto;
+        padding: var(--spacing-md);">
       <div class="footer-logos-header">Präsentiert von:</div>
+    </div>
     <!-- Desktop: Only Ansicht.png -->
     <div class="footer-logos-desktop">
       <div class="footer-logo">
@@ -105,20 +108,23 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
     </div>
     <!-- Mobile: All logos, dynamic width and grouping -->
     <div class="footer-logos-mobile">
-      {logos.map((logo) => {
-        const widthClass = logo.aspect > 3 ? 'footer-logo-wide' : 'footer-logo-half';
-        return logo.link ? (
-          <div class={`footer-logo ${widthClass}`}>
-            <a href={logo.link} target="_blank" rel="noopener">
+      {
+        logos.map((logo) => {
+          const widthClass =
+            logo.aspect > 3 ? "footer-logo-wide" : "footer-logo-half";
+          return logo.link ? (
+            <div class={`footer-logo ${widthClass}`}>
+              <a href={logo.link} target="_blank" rel="noopener">
+                <img src={logo.src} alt={logo.alt} />
+              </a>
+            </div>
+          ) : (
+            <div class={`footer-logo ${widthClass}`}>
               <img src={logo.src} alt={logo.alt} />
-            </a>
-          </div>
-        ) : (
-          <div class={`footer-logo ${widthClass}`}>
-            <img src={logo.src} alt={logo.alt} />
-          </div>
-        );
-      })}
+            </div>
+          );
+        })
+      }
     </div>
     <div
       style="float: right; align-items: center; justify-content: center; padding: 1rem;"
