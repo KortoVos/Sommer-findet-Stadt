@@ -1,0 +1,133 @@
+---
+const calendarData = {
+    title: "Sommer findet Stadt 2025",
+    description: "Sommer findet Stadt Festival Troisdorf-Sieglar",
+    location: "Marktplatz Troisdorf-Sieglar",
+    start: "2025-08-08T17:00:00",
+    end: "2025-08-10T19:00:00",
+    startUtc: "20250808T170000",
+    endUtc: "20250810T190000",
+    ics: "/calendar.ics",
+};
+
+const calendarOptions = [
+    {
+        label: "Als ICS-Datei herunterladen",
+        href: calendarData.ics,
+        download: true,
+        target: null,
+        rel: null,
+    },
+    {
+        label: "Zu Google Kalender hinzufügen",
+        href: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(calendarData.title)}&dates=${calendarData.startUtc}/${calendarData.endUtc}&details=${encodeURIComponent(calendarData.description)}&location=${encodeURIComponent(calendarData.location)}`,
+        download: false,
+        target: "_blank",
+        rel: "noopener",
+    },
+    {
+        label: "Zu Outlook Kalender hinzufügen",
+        href: `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(calendarData.title)}&body=${encodeURIComponent(calendarData.description)}&startdt=${calendarData.start}&enddt=${calendarData.end}&location=${encodeURIComponent(calendarData.location)}`,
+        download: false,
+        target: "_blank",
+        rel: "noopener",
+    },
+    {
+        label: "Zu Yahoo Kalender hinzufügen",
+        href: `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeURIComponent(calendarData.title)}&st=${calendarData.startUtc}&et=${calendarData.endUtc}&desc=${encodeURIComponent(calendarData.description)}&in_loc=${encodeURIComponent(calendarData.location)}`,
+        download: false,
+        target: "_blank",
+        rel: "noopener",
+    },
+];
+---
+
+<style>
+    .save-date-popup-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+    }
+    .save-date-popup-modal:target {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .save-date-popup-content {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 90vw;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
+        position: relative;
+        text-align: center;
+    }
+    .save-date-popup-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        text-decoration: none;
+        font-size: 2rem;
+        color: #888;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .save-date-popup-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-top: 1.5rem;
+    }
+    .save-date-popup-options a {
+        display: inline-block;
+        padding: 0.7rem 1.5rem;
+        border-radius: 0.5rem;
+        background: var(--color-primary, #ea506e);
+        color: #fff;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .save-date-popup-options a:hover {
+        background: var(--color-accent, #ffcd1c);
+        color: var(--color-primary, #ea506e);
+    }
+</style>
+
+<div
+    id="save-date-popup"
+    class="save-date-popup-modal"
+    tabindex="-1"
+    aria-modal="true"
+    role="dialog"
+>
+    <div class="save-date-popup-content">
+        <a href="#" class="save-date-popup-close" aria-label="Schließen"
+            >&times;</a
+        >
+        <h2>Im Kalender speichern</h2>
+        <div class="save-date-popup-options">
+            {
+                calendarOptions.map((option) => (
+                    <a
+                        href={option.href}
+                        {...(option.download ? { download: true } : {})}
+                        {...(option.target ? { target: option.target } : {})}
+                        {...(option.rel ? { rel: option.rel } : {})}
+                    >
+                        {option.label}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</div>

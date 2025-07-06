@@ -1,3 +1,7 @@
+---
+import SaveTheDatePopup from "./../components/SaveTheDatePopup.astro";
+---
+
 <style>
   .highlights {
     padding: var(--spacing-xl) var(--spacing-md);
@@ -32,7 +36,10 @@
     max-width: 320px;
     min-width: 160px;
     display: block;
-    transition: max-width 0.3s, min-width 0.3s, width 0.3s;
+    transition:
+      max-width 0.3s,
+      min-width 0.3s,
+      width 0.3s;
   }
 
   .highlights-icons {
@@ -57,9 +64,15 @@
   }
 
   /* Hide/show badges based on screen size */
-  .mobile-badge { display: none; }
-  .mobile-badge-link { display: none; }
-  .desktop-badge-link { display: block; }
+  .mobile-badge {
+    display: none;
+  }
+  .mobile-badge-link {
+    display: none;
+  }
+  .desktop-badge-link {
+    display: block;
+  }
   @media (max-width: 767px) {
     .event-info {
       flex-direction: column;
@@ -83,16 +96,26 @@
     .event-info-text p {
       margin-top: 0.5rem;
     }
-    .mobile-badge { display: block; align-self: center; margin-left: auto; margin-right: auto;}
-    .mobile-badge-link { display: block; width: 100%; }
-    .desktop-badge-link { display: none; }
+    .mobile-badge {
+      display: block;
+      align-self: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .mobile-badge-link {
+      display: block;
+      width: 100%;
+    }
+    .desktop-badge-link {
+      display: none;
+    }
   }
 
   .badge-pulse-animate {
-    animation: badgePulse 1.2s cubic-bezier(0.4,0,0.2,1);
+    animation: badgePulse 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .badge-pulse-loop {
-    animation: badgePulseLoop 2.5s cubic-bezier(.35,0,.7,1) infinite;
+    animation: badgePulseLoop 2.5s cubic-bezier(0.35, 0, 0.7, 1) infinite;
   }
   @keyframes badgePulse {
     0% {
@@ -122,23 +145,26 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileBadge = document.querySelector('.mobile-badge');
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileBadge = document.querySelector(".mobile-badge");
     if (!mobileBadge) return;
     let hasAnimated = false;
-    const observer = new window.IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !hasAnimated) {
-          mobileBadge.classList.add('badge-pulse-animate');
-          hasAnimated = true;
-          setTimeout(() => {
-            mobileBadge.classList.remove('badge-pulse-animate');
-            mobileBadge.classList.add('badge-pulse-loop');
-          }, 1200);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.5 });
+    const observer = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            mobileBadge.classList.add("badge-pulse-animate");
+            hasAnimated = true;
+            setTimeout(() => {
+              mobileBadge.classList.remove("badge-pulse-animate");
+              mobileBadge.classList.add("badge-pulse-loop");
+            }, 1200);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
     observer.observe(mobileBadge);
   });
 </script>
@@ -147,25 +173,31 @@
   <div class="highlights-content">
     <div class="event-info">
       <div class="event-info-text">
-        <h2>
-         08.–10. AUGUST 2025
-        </h2>
-        <h3>
-         Marktplatz Troisdorf-Sieglar
-        </h3>
+        <h2>08.–10. AUGUST 2025</h2>
+        <h3>Marktplatz Troisdorf-Sieglar</h3>
         <!-- Badge for mobile, shown between h3 and p -->
-        <a href="/calendar.ics" download class="mobile-badge-link">
-          <img src="./badge-save-the-date.png" alt="Jetzt im Kalender speichern" class="calendar-badge mobile-badge" />
+        <a href="#save-date-popup" class="mobile-badge-link">
+          <img
+            src="./badge-save-the-date.png"
+            alt="Jetzt im Kalender speichern"
+            class="calendar-badge mobile-badge"
+          />
         </a>
         <p>
           Zwei Tage voller Genuss, Musik und Sommerflair: <br />
-          Sommer findet Stadt verwandelt den Sieglarer Marktplatz in eine kleine Festivaloase. <br />
-          Feine Weine, schmackofatze Speisen, Live-Musik und lauschige Plätze laden zum Verweilen ein.
+          Sommer findet Stadt verwandelt den Sieglarer Marktplatz in eine kleine
+          Festivaloase. <br />
+          Feine Weine, schmackofatze Speisen, Live-Musik und lauschige Plätze laden
+          zum Verweilen ein.
         </p>
       </div>
       <!-- Badge for desktop, stays on the right -->
-      <a href="/calendar.ics" download class="desktop-badge-link">
-        <img src="./badge-save-the-date.png" alt="Jetzt im Kalender speichern" class="calendar-badge desktop-badge" />
+      <a href="#save-date-popup" class="desktop-badge-link">
+        <img
+          src="./badge-save-the-date.png"
+          alt="Jetzt im Kalender speichern"
+          class="calendar-badge desktop-badge"
+        />
       </a>
     </div>
     <div class="highlights-icons">
@@ -183,4 +215,6 @@
       </div>
     </div>
   </div>
+
+  <SaveTheDatePopup />
 </section>
