@@ -1,0 +1,108 @@
+---
+const mapPoints = [
+    { label: "Eingang", color: "#d6b9d8" },
+    { label: "Kasse", color: "#af2c60" },
+    { label: "Toilette", color: "#f67f23" },
+    { label: "Getränke", color: "#6fc3cc" },
+    { label: "Sitzplätze", color: "#f3c532" },
+    { label: "Foodtrucks", color: "#68c046" },
+    { label: "Stehplätze", color: "#c63463" },
+    { label: "Bühne", color: "#d5b9d7" },
+];
+---
+
+<style>
+    .map-section {
+        padding: var(--spacing-xl) var(--spacing-md);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: var(--spacing-lg);
+    }
+    .map-image {
+        flex: 1;
+        display: flex;
+        max-width: 50%;
+        justify-content: center;
+        width: 100%;
+    }
+    .map-image img {
+        width: auto;
+        max-height: 18em;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .map-list {
+        flex: 1;
+        max-width: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 1.5rem;
+    }
+    .map-list h2 {
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: var(--color-accentSecondary);
+        margin-bottom: 0.2em;
+        margin-top: 0;
+    }
+    .map-list h3 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--color-text);
+        margin-bottom: var(--spacing-md);
+        margin-top: 0;
+    }
+    .map-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .map-list li {
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin-bottom: 0.7em;
+    }
+    @media (max-width: 768px) {
+        .map-section {
+            flex-direction: column;
+            align-items: center;
+            gap: 0px;
+        }
+        .map-list {
+            max-width: 100%;
+        }
+        .map-image {
+            max-width: 70%;
+            margin-bottom: -4em;
+        }
+    }
+</style>
+
+<section id="lageplan">
+    <h2>Lageplan</h2>
+    <div class="map-section">
+        <div class="map-image">
+            <img src="./Map.png" alt="Lageplan Festival" />
+        </div>
+        <div class="map-list">
+            <ul>
+                {
+                    mapPoints.map((point, idx) => (
+                        <li style={`color: ${point.color}`}>
+                            <span
+                                style={`color: ${point.color}; font-weight: bold; margin-right: 0.5em;`}
+                            >
+                                {idx + 1}.
+                            </span>{" "}
+                            {point.label}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</section>
