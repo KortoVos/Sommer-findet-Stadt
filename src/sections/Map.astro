@@ -92,7 +92,7 @@ const mapPoints = [
             z-index: 1;
         }
         .map-image {
-            max-width: 50%;
+            max-width: 60%;
             margin-bottom: 0em;
             z-index: -1;
         }
@@ -111,6 +111,23 @@ const mapPoints = [
     function isMobile() {
       return window.matchMedia('(max-width: 768px)').matches;
     }
+    // Parallax parameters for speed curve
+    const parallaxParams = {
+      minSpeed: 0.0012, // slowest at start
+      maxSpeed: 0.4,  // fastest in the middle
+      endSpeed: 0.018, // slowest at end
+      xFactor: 0.07  // right movement factor
+    };
+    function parallaxSpeedCurve(t) {
+      // t: 0 (start) to 1 (end)
+      // Ease in, fast in middle, ease out (cubic)
+      // You can adjust this function for different curves
+      return (
+        parallaxParams.minSpeed * (1 - t) * (1 - t) +
+        parallaxParams.maxSpeed * 4 * t * (1 - t) +
+        parallaxParams.endSpeed * t * t
+      );
+    }
     function onScroll() {
       if (!isMobile()) {
         image.style.transform = '';
@@ -118,21 +135,20 @@ const mapPoints = [
       }
       const rect = section.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      // Start effect earlier: trigger when section is within 1.5x viewport height from top
       const triggerOffset = windowHeight * 0.3;
       if (rect.bottom < -triggerOffset || rect.top > windowHeight) {
         image.style.transform = '';
         return;
       }
-      // Parallax: move image up and slightly right as you scroll
       const scrollY = Math.max(0, -rect.top + triggerOffset);
-      const offsetY = scrollY * 0.3;
-      const offsetX = scrollY * 0.035; // subtle right movement
-      // Prevent horizontal scroll by using 'overflow-x: clip' on parent, but allow full image to be visible
+      const sectionHeight = rect.height + triggerOffset;
+      const t = Math.min(1, scrollY / sectionHeight); // progress 0..1
+      const speed = parallaxSpeedCurve(t);
+      const offsetY = scrollY * speed;
+      const offsetX = scrollY * parallaxParams.xFactor;
       const parent = image.parentElement;
       if (parent) parent.style.overflow = 'visible';
       image.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      // Ensure image stays fully visible and doesn't shrink
       image.style.maxWidth = 'none';
       image.style.width = 'auto';
     }
