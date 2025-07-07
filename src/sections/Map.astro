@@ -26,8 +26,11 @@ const mapPoints = [
         max-width: 50%;
         justify-content: center;
         width: 100%;
+        position: relative;
+        align-self: flex-start;
+        z-index: 2;
     }
-    .map-image img {
+ .map-image img {
         width: auto;
         max-height: 18em;
         border-radius: 0;
@@ -68,7 +71,8 @@ const mapPoints = [
     }
     @media (max-width: 768px) {
         #lageplan{
-            padding-top: 5em;           
+            padding-top: 5em;     
+            overflow-x: hidden;
         }
         #lageplan h2{
             z-index: 5;     
@@ -94,10 +98,50 @@ const mapPoints = [
         }
         .map-image img {
             position: relative;
-            top: -12em;
+            top: -8em;
         }
     }
 </style>
+<script>
+  // Parallax effect for map image: moves at half scroll speed within section
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('lageplan');
+    const image = section?.querySelector('.map-image img');
+    if (!section || !image) return;
+    function isMobile() {
+      return window.matchMedia('(max-width: 768px)').matches;
+    }
+    function onScroll() {
+      if (!isMobile()) {
+        image.style.transform = '';
+        return;
+      }
+      const rect = section.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      // Start effect earlier: trigger when section is within 1.5x viewport height from top
+      const triggerOffset = windowHeight * 0.3;
+      if (rect.bottom < -triggerOffset || rect.top > windowHeight) {
+        image.style.transform = '';
+        return;
+      }
+      // Parallax: move image up and slightly right as you scroll
+      const scrollY = Math.max(0, -rect.top + triggerOffset);
+      const offsetY = scrollY * 0.3;
+      const offsetX = scrollY * 0.035; // subtle right movement
+      // Prevent horizontal scroll by using 'overflow-x: clip' on parent, but allow full image to be visible
+      const parent = image.parentElement;
+      if (parent) parent.style.overflow = 'visible';
+      image.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      // Ensure image stays fully visible and doesn't shrink
+      image.style.maxWidth = 'none';
+      image.style.width = 'auto';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  });
+</script>
+   
 
 <section id="lageplan">
     <h2>Lageplan</h2>
