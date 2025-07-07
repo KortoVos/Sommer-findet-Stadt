@@ -72,7 +72,7 @@ const mapPoints = [
     @media (max-width: 768px) {
         #lageplan{
             padding-top: 5em;     
-            overflow: visible;      
+            overflow-x: hidden;
         }
         #lageplan h2{
             z-index: 5;     
@@ -98,7 +98,7 @@ const mapPoints = [
         }
         .map-image img {
             position: relative;
-            top: -10em;
+            top: -8em;
         }
     }
 </style>
@@ -127,7 +127,7 @@ const mapPoints = [
       // Parallax: move image up and slightly right as you scroll
       const scrollY = Math.max(0, -rect.top + triggerOffset);
       const offsetY = scrollY * 0.3;
-      const offsetX = scrollY * 0.03; // subtle right movement
+      const offsetX = scrollY * 0.035; // subtle right movement
       // Prevent horizontal scroll by using 'overflow-x: clip' on parent, but allow full image to be visible
       const parent = image.parentElement;
       if (parent) parent.style.overflow = 'visible';
