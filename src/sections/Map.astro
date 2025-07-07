@@ -67,17 +67,34 @@ const mapPoints = [
         margin-bottom: 0.7em;
     }
     @media (max-width: 768px) {
+        #lageplan{
+            padding-top: 5em;           
+        }
+        #lageplan h2{
+            z-index: 5;     
+        }
         .map-section {
-            flex-direction: column;
+            flex-direction: row-reverse;
             align-items: center;
             gap: 0px;
         }
         .map-list {
+            width: 80%;
             max-width: 100%;
+            z-index: 1;
+        }
+         .map-list ul {
+            width: 150%;
+            z-index: 1;
         }
         .map-image {
-            max-width: 70%;
-            margin-bottom: -4em;
+            max-width: 50%;
+            margin-bottom: 0em;
+            z-index: -1;
+        }
+        .map-image img {
+            position: relative;
+            top: -12em;
         }
     }
 </style>
