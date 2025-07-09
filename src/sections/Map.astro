@@ -128,7 +128,7 @@ const mapPoints = [
         parallaxParams.endSpeed * t * t
       );
     }
-    function onScroll() {
+    function onScrollMap() {
       if (!isMobile()) {
         image.style.transform = '';
         return;
@@ -152,9 +152,9 @@ const mapPoints = [
       image.style.maxWidth = 'none';
       image.style.width = 'auto';
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    onScroll();
+    window.addEventListener('scroll', onScrollMap, { passive: true });
+    window.addEventListener('resize', onScrollMap);
+    onScrollMap();
   });
 </script>
    
