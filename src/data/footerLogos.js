@@ -26,6 +26,11 @@ export default [
     "aspect": 1.5
   },
   {
+    "src": "./Logos/GetrankeExpress.jfif",
+    "alt": "Getränke Express",
+    "aspect":3.85
+  },
+  {
     "src": "./Logos/04Elektro Koch.png",
     "alt": "04Elektro Koch",
     "aspect": 4.19
