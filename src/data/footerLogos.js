@@ -21,14 +21,14 @@ export default [
     "aspect": 2.71
   },
   {
+    "src": "./Logos/022GetrankeExpress.png",
+    "alt": "022GetrankeExpress",
+    "aspect": 2.33
+  },
+  {
     "src": "./Logos/03 Tilller Immobilien.png",
     "alt": "03 Tilller Immobilien",
     "aspect": 1.5
-  },
-  {
-    "src": "./Logos/GetrankeExpress.jfif",
-    "alt": "Getränke Express",
-    "aspect":3.85
   },
   {
     "src": "./Logos/04Elektro Koch.png",
