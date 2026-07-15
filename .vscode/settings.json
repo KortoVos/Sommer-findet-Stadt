@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^\\$paths = @\\('C:\\\\Program Files\\\\ImageMagick\\\\magick\\.exe','C:\\\\Program Files\\\\ImageMagick\\\\convert\\.exe','C:\\\\Windows\\\\System32\\\\magick\\.exe','C:\\\\Windows\\\\System32\\\\convert\\.exe'\\); foreach \\(\\$p in \\$paths\\) \\{ if \\(Test-Path \\$p\\) \\{ Write-Host \\$p \\} \\}$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

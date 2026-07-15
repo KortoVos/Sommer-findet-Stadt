@@ -11,29 +11,19 @@ export default [
     "aspect": 2.58
   },
   {
-    "src": "./Logos/01 Sternberg Audio.png",
-    "alt": "01 Sternberg Audio",
-    "aspect": 2.65
-  },
-  {
-    "src": "./Logos/02 Die Wein Qulle.png",
-    "alt": "02 Die Wein Qulle",
+    "src": "./Logos/016 Die Wein Qulle.png",
+    "alt": "016 Die Wein Qulle",
     "aspect": 2.71
   },
   {
-    "src": "./Logos/022GetrankeExpress.png",
-    "alt": "022GetrankeExpress",
-    "aspect": 2.33
+    "src": "./Logos/02 Gründach.png",
+    "alt": "02 GrüNdach",
+    "aspect": 3.39
   },
   {
-    "src": "./Logos/03 Tilller Immobilien.png",
-    "alt": "03 Tilller Immobilien",
-    "aspect": 1.5
-  },
-  {
-    "src": "./Logos/04Elektro Koch.png",
-    "alt": "04Elektro Koch",
-    "aspect": 4.19
+    "src": "./Logos/03 Eska.jpeg",
+    "alt": "03 Eska",
+    "aspect": 3
   },
   {
     "src": "./Logos/05 Bauernhof Fritzen.png",
@@ -41,9 +31,14 @@ export default [
     "aspect": 2.71
   },
   {
-    "src": "./Logos/06 gründach.png",
-    "alt": "06 GrüNdach",
-    "aspect": 3.39
+    "src": "./Logos/06 MyMadonna.jpeg",
+    "alt": "06 MyMadonna",
+    "aspect": 1.65
+  },
+  {
+    "src": "./Logos/07 mkTechnologyGroup.jpeg",
+    "alt": "07 MkTechnologyGroup",
+    "aspect": 1.54
   },
   {
     "src": "./Logos/08 Ne Hoofe volle Lööre.png",
@@ -51,13 +46,28 @@ export default [
     "aspect": 4.8
   },
   {
-    "src": "./Logos/09 Provinzial.png",
-    "alt": "09 Provinzial",
-    "aspect": 3.85
+    "src": "./Logos/09 OdenthalWerbeTechnik.jpeg",
+    "alt": "09 OdenthalWerbeTechnik",
+    "aspect": 1.36
+  },
+  {
+    "src": "./Logos/11 OdentahlMalerBetrieb.jpeg",
+    "alt": "11 OdentahlMalerBetrieb",
+    "aspect": 4.29
   },
   {
     "src": "./Logos/12 Los Bombelinos.png",
     "alt": "12 Los Bombelinos",
     "aspect": 7.32
+  },
+  {
+    "src": "./Logos/15 Stomberg.jpeg",
+    "alt": "15 Stomberg",
+    "aspect": 1.96
+  },
+  {
+    "src": "./Logos/hachenburgerPils.jpeg",
+    "alt": "HachenburgerPils",
+    "aspect": 1
   }
 ];

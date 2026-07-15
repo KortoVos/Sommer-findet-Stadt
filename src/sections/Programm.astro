@@ -3,26 +3,26 @@ const acts = [
   {
     "day": "Freitag",
     "artist": "Benedict Bendinelli",
-    "time": "17:00 - 22:00",
-    "details": "Disco House & 90ger"
+    "time": "Ab 17:00",
+    "details": "Disco House & 90er"
   },
   {
     "day": "Samstag",
-    "artist": "dino.tils",
-    "time": "16:00 - 22:00",
-    "details": "House, Funk & 2000er Beats"
+    "artist": "DJ Niko Prümm",
+    "time": "16:00",
+    "details": "Kopfnicken & Mensch sein"
   },
   {
     "day": "Samstag",
-    "artist": "The Basements",
-    "time": "Ab 16:30",
-    "details": "4 Live Sessions zwischen den DJ Sets"
+    "artist": "Jörg Kalscheuer",
+    "time": "19:30 - 21:00",
+    "details": "Sundowner Deephouse"
   },
   {
     "day": "Samstag",
-    "artist": "Josh",
-    "time": "21:00 - 22:00",
-    "details": "shade of pop"
+    "artist": "Fabian Kronbach",
+    "time": "21:30",
+    "details": "Kölsche Musik"
   },
   {
     "day": "Sonntag",
@@ -68,9 +68,20 @@ const acts = [
   .dayHeading {
     font-size: 2rem;
     font-weight: bold;
-    color: var(--color-accentSecondary);
     margin-top: var(--spacing-xl);
     margin-bottom: var(--spacing-sm);
+  }
+
+  .dayHeading.freitag {
+    color: #e44134;
+  }
+
+  .dayHeading.samstag {
+    color: #bf161e;
+  }
+
+  .dayHeading.sonntag {
+    color: #811524;
   }
 
   .acts-list > div:first-child .dayHeading {
@@ -78,12 +89,12 @@ const acts = [
   }
 
   .artist {
-    color: var(--color-primary);
+    color: #811524;
     font-weight: bold;
   }
 
   .details {
-    color: var(--color-accent);
+    color: #c7c341;
   }
 
   @media (max-width: 768px) {
@@ -142,7 +153,7 @@ const acts = [
   <div class="acts-list">
     {['Freitag', 'Samstag', 'Sonntag'].map((day) => (
       <div>
-        <h2 class="dayHeading">{day}</h2>
+        <h2 class={`dayHeading ${day.toLowerCase()}`}>{day}</h2>
         <ul>
           {acts
             .filter((act) => act.day === day)
