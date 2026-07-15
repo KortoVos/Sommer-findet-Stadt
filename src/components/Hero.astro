@@ -2,22 +2,24 @@
   .hero {
     background: url('/photo-festival-crowd.png') no-repeat center bottom;
     background-size: cover;
-    width: 100vw;
+    width: 100%;
     height: 86vh;
-    /* Ensure no horizontal scroll */
-    max-width: 100vw;
-    overflow-x: hidden;
+    margin-bottom: 1px;
+    max-width: 100%;
+    overflow: hidden;
     position: relative;
   }
+
   .hero-wave {
     position: absolute;
-    bottom: -1px;
+    bottom: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 80px;
     z-index: 2;
     display: block;
     pointer-events: none;
+    transform: translateY(1px);
   }
 </style>
 <section id="home" class="hero">

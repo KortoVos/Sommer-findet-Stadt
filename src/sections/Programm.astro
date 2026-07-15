@@ -40,6 +40,7 @@ const acts = [
     align-items: flex-start;
     flex-wrap: wrap;
     gap: var(--spacing-lg);
+    position: relative;
   }
 
   .lineup-image {
@@ -97,6 +98,8 @@ const acts = [
     color: #c7c341;
   }
 
+  .lineup-image { z-index: -1; }
+
   @media (max-width: 768px) {
     .programm {
       flex-direction: column;
@@ -122,7 +125,7 @@ const acts = [
       opacity: 0.7;
     }
     to {
-      transform: translate(40px,20px);
+      transform: translate(120px,-60px);
       opacity: 1;
     }
   }
