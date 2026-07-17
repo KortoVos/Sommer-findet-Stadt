@@ -77,6 +77,7 @@ const mapPoints = [
         #lageplan{
             padding-top: 5em;     
             overflow-x: hidden;
+            margin-left: 0.5em;
         }
         #lageplan h2{
             z-index: 5;     
@@ -139,7 +140,7 @@ const mapPoints = [
       }
       const rect = section.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const triggerOffset = windowHeight * 0.3;
+      const triggerOffset = windowHeight * 0.5;
       if (rect.bottom < -triggerOffset || rect.top > windowHeight) {
         image.style.transform = '';
         return;
