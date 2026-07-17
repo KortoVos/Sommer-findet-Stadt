@@ -41,6 +41,7 @@ const acts = [
     flex-wrap: wrap;
     gap: var(--spacing-lg);
     position: relative;
+    overflow: hidden;
   }
 
   .lineup-image {
@@ -113,12 +114,11 @@ const acts = [
       max-width: 70%;
       margin-bottom: -7em;
     }
-  }
 
-  .animate-slide-right {
+      .animate-slide-right {
     animation: slideRight 3.2s cubic-bezier(0.4,0,0.2,1) forwards;
   }
-  @keyframes slideRight {
+   @keyframes slideRight {
     from {
       transform: translate(0,0);
       transform: translateY(0);
@@ -129,6 +129,10 @@ const acts = [
       opacity: 1;
     }
   }
+  }
+
+
+ 
 </style>
 
 <script>
