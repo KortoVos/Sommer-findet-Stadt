@@ -1,6 +1,7 @@
 ---
 import logos from "../data/footerLogos.js";
-import ImpressumPopup from "../components/ImpressumPopup.astro";
+
+const { showImpressumLink = true } = Astro.props;
 ---
 
 <style>
@@ -89,6 +90,15 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
     width: 100%;
     align-items: right;
   }
+  .footer-impressum-link {
+    color: var(--color-primary, #ea506e);
+    font: inherit;
+    text-decoration: underline;
+  }
+  .footer-impressum-link:hover,
+  .footer-impressum-link:focus {
+    color: var(--color-accent);
+  }
 
 </style>
 <footer>
@@ -113,7 +123,7 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
     <!-- Desktop: Only Ansicht.png -->
     <div class="footer-logos-desktop">
       <div class="footer-logo">
-        <img src="./Ansicht.png" alt="Ansicht" />
+        <img src="/Ansicht.png" alt="Ansicht" />
       </div>
     </div>
     <!-- Mobile: All logos, dynamic width and grouping -->
@@ -136,9 +146,13 @@ import ImpressumPopup from "../components/ImpressumPopup.astro";
         })
       }
     </div>
-    <div class="footer-impressum-container">
-      <ImpressumPopup />
-    </div>
+    {
+      showImpressumLink && (
+        <div class="footer-impressum-container">
+          <a href="/impressum/" class="footer-impressum-link">Impressum</a>
+        </div>
+      )
+    }
  
   </div>
 </footer>

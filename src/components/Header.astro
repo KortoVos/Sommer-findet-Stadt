@@ -1,4 +1,12 @@
 ---
+const {
+  variant = "home",
+  backHref = "/",
+  backLabel = "Zur&uuml;ck zur Website",
+} = Astro.props;
+
+const isSimpleHeader = variant === "simple";
+
 const navigationItems = [
   { name: "Highlights", href: "#highlights" },
   { name: "Programm", href: "#programm" },
@@ -10,51 +18,65 @@ const navigationItems = [
 <header  class="header">
   <div class="header-container">
     <div class="header-flex">
-      <!-- Logo -->
-      <div class="logo-wrapper">
-        <a href="#home" class="logo-link">
-          <img src="./logo-sommer-findet-stadt.png" alt="Sommer findet Stadt Logo" class="logo-image" />
-        </a>
-      </div>
+      {
+        !isSimpleHeader && (
+          <div class="logo-wrapper">
+            <a href="#home" class="logo-link">
+              <img src="/logo-sommer-findet-stadt.png" alt="Sommer findet Stadt Logo" class="logo-image" />
+            </a>
+          </div>
+        )
+      }
 
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav" id="desktop-nav">
-        {navigationItems.map((item) => (
-          <a
-            href={item.href}
-            class="nav-link"
-            data-section={item.href.substring(1)}
-          >
-            {item.name}
-            <div class="nav-indicator"></div>
-          </a>
-        ))}
-      </nav>
+      {
+        isSimpleHeader ? (
+          <a href={backHref} class="header-back-link" set:html={backLabel} />
+        ) : (
+          <nav class="desktop-nav" id="desktop-nav">
+            {navigationItems.map((item) => (
+              <a
+                href={item.href}
+                class="nav-link"
+                data-section={item.href.substring(1)}
+              >
+                {item.name}
+                <div class="nav-indicator" />
+              </a>
+            ))}
+          </nav>
+        )
+      }
 
-      <!-- Mobile Menu Button -->
-      <div class="mobile-menu-btn-wrapper">
-        <button id="mobile-menu-button" class="mobile-menu-btn">
-          <svg class="icon-menu" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      {
+        !isSimpleHeader && (
+          <div class="mobile-menu-btn-wrapper">
+            <button id="mobile-menu-button" class="mobile-menu-btn">
+              <svg class="icon-menu" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        )
+      }
     </div>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav hidden" id="mobile-nav">
-      <div class="mobile-nav-links">
-        {navigationItems.map((item) => (
-          <a
-            href={item.href}
-            class="mobile-nav-link"
-            data-section={item.href.substring(1)}
-          >
-            {item.name}
-          </a>
-        ))}
-      </div>
-    </nav>
+    {
+      !isSimpleHeader && (
+        <nav class="mobile-nav hidden" id="mobile-nav">
+          <div class="mobile-nav-links">
+            {navigationItems.map((item) => (
+              <a
+                href={item.href}
+                class="mobile-nav-link"
+                data-section={item.href.substring(1)}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )
+    }
   </div>
 </header>
 
@@ -237,6 +259,27 @@ const navigationItems = [
   .nav-link:hover,
   .nav-link.text-blue-600 {
     color: var(--color-accent);
+  }
+  .header-back-link {
+    position: absolute;
+    right: var(--spacing-md);
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .header-back-link:hover,
+  .header-back-link:focus {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+  @media (max-width: 767px) {
+    .header-back-link {
+      font-size: 1rem;
+      max-width: 55vw;
+      text-align: right;
+    }
   }
   .nav-indicator {
     position: absolute;

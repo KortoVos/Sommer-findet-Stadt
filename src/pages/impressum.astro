@@ -1,0 +1,170 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout>
+  <Header slot="header" variant="simple" backLabel="Zur&uuml;ck zur Website" />
+
+  <section class="impressum-page">
+    <header class="impressum-header">
+      <h1>Impressum</h1>
+    </header>
+
+    <div class="impressum-content">
+      <h2>Wichtig zu wissen</h2>
+
+      <p>Die Weinquelle GmbH<br />Langbaurghstra&szlig;e 6<br />53842 Troisdorf</p>
+
+      <p>
+        Handelsregister: B 14565<br />
+        Registergericht: Siegburg<br />
+        Umsatzsteuer-Identifikationsnummer(n): DE220338340
+      </p>
+
+      <p><strong>Vertreten durch:</strong><br />Bj&ouml;rn Gerhard</p>
+
+      <h2>Kontakt</h2>
+
+      <p>
+        Telefon: 0 22 41/25 27 02-0<br />
+        Fax: 0 22 41/25 27 02-9<br />
+        E-Mail: info@die-weinquelle.de
+      </p>
+
+      <h2>Verantwortlich gem&auml;&szlig; &sect; 18 MStV:</h2>
+
+      <p>Bj&ouml;rn Gerhard<br />Langbaurghstra&szlig;e 6<br />53842 Troisdorf</p>
+
+      <h2>Angaben zur Berufs&shy;haftpflicht&shy;versicherung</h2>
+
+      <p>
+        <strong>Name und Sitz des Versicherers:</strong><br />
+        Provinzial Rheinland Versicherung AG<br />
+        40195 D&uuml;sseldorf
+      </p>
+
+      <p><strong>Geltungsraum der Versicherung:</strong><br />Deutschland</p>
+
+      <h2>EU-Streitschlichtung</h2>
+
+      <p>
+        Zur Teilnahme an einem Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle sind wir nicht verpflichtet und nicht bereit.
+      </p>
+
+      <h2>Zust&auml;ndige Beh&ouml;rde f&uuml;r audiovisuelle Mediendienste</h2>
+
+      <p>
+        Landesanstalt f&uuml;r Medien NRW<br />
+        Zollhof 2<br />
+        40025 D&uuml;sseldorf<br />
+        Deutschland
+      </p>
+
+      <p>
+        <strong>
+          Unser Unternehmen ist gem&auml;&szlig; den gesetzlichen Bestimmungen vom
+          Anwendungsbereich der Barrierefreiheitsanforderungen und somit von der
+          Pflicht zur Erstellung und Bereitstellung einer
+          Barrierefreiheitserkl&auml;rung ausgenommen.
+        </strong>
+      </p>
+
+      <hr />
+
+      <p>
+        <strong>Verantwortlich:</strong><br />
+        Sternberg Audio<br />
+        Fabian Sternberg<br />
+        Marktplatz 17<br />
+        53844 Troisdorf
+      </p>
+
+      <p>
+        <strong>Kontakt</strong><br />
+        Telefon: 01523/4123771<br />
+        E-Mail: Kontakt@sternberg-audio.de
+      </p>
+
+      <p>
+        <strong>Umsatzsteuer-ID</strong><br />
+        Umsatzsteuer-Identifikationsnummer: DE308658547
+      </p>
+
+      <p>
+        <strong>Steuernummer</strong><br />
+        220/5454/4260
+      </p>
+
+      <p>
+        <strong>Aufsichtsbeh&ouml;rde</strong><br />
+        Amtsgericht Siegburg
+      </p>
+
+      <hr />
+
+      <p class="liability-note">
+        <strong>Haftungshinweis:</strong> Trotz sorgf&auml;ltiger inhaltlicher
+        Kontrolle &uuml;bernehmen wir keine Haftung f&uuml;r die Inhalte externer
+        Links. F&uuml;r den Inhalt der verlinkten Seiten sind ausschlie&szlig;lich
+        deren Betreiber verantwortlich.
+      </p>
+    </div>
+  </section>
+
+  <Footer slot="footer" showImpressumLink={false} />
+</BaseLayout>
+
+<style>
+  .impressum-page {
+    width: min(100%, 920px);
+    margin: 0 auto;
+    padding: 7rem var(--spacing-md) 4rem;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .impressum-header h1 {
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    line-height: 1;
+    margin: 0 0 2.5rem;
+  }
+
+  .impressum-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .impressum-content h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin: 2.25rem 0 1rem;
+    text-align: left;
+  }
+
+  .impressum-content h2:first-child {
+    margin-top: 0;
+  }
+
+  .impressum-content p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.55;
+    margin: 0 0 1.25rem;
+    text-align: left;
+  }
+
+  .impressum-content hr {
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.14);
+    margin: 2rem 0;
+  }
+
+  .liability-note {
+    color: #666;
+  }
+</style>
