@@ -8,6 +8,8 @@ const { showImpressumLink = true } = Astro.props;
   footer {
     padding: 0;
     text-align: center;
+    width: 100%;
+    clear: both;
   }
   .footer-wave {
     width: 100%;
@@ -81,23 +83,42 @@ const { showImpressumLink = true } = Astro.props;
     font-size: 2.2rem;
     color: var(--color-primary);
   }
-   .footer-impressum-container {
-    float: right;
+  .footer-privacy-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
-    padding: 5rem;
-    background-color: #fff;
     width: 100%;
-    align-items: right;
+    padding: 1.5rem clamp(1rem, 5vw, 5rem) max(2rem, env(safe-area-inset-bottom));
+    box-sizing: border-box;
   }
   .footer-impressum-link {
     color: var(--color-primary, #ea506e);
     font: inherit;
     text-decoration: underline;
   }
+  .footer-privacy-settings {
+    border: 0;
+    background: transparent;
+    color: var(--color-primary, #ea506e);
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+  }
   .footer-impressum-link:hover,
-  .footer-impressum-link:focus {
+  .footer-impressum-link:focus,
+  .footer-privacy-settings:hover,
+  .footer-privacy-settings:focus {
     color: var(--color-accent);
+  }
+
+  @media (max-width: 767px) {
+    .footer-privacy-container {
+      justify-content: center;
+      padding-top: 1rem;
+      padding-bottom: max(2rem, calc(env(safe-area-inset-bottom) + 1rem));
+    }
   }
 
 </style>
@@ -146,13 +167,18 @@ const { showImpressumLink = true } = Astro.props;
         })
       }
     </div>
-    {
-      showImpressumLink && (
-        <div class="footer-impressum-container">
+    <div class="footer-privacy-container">
+      {
+        showImpressumLink && (
           <a href="/impressum/" class="footer-impressum-link">Impressum</a>
-        </div>
-      )
-    }
+        )
+      }
+      <button
+        class="footer-privacy-settings"
+        type="button"
+        data-clarity-settings>Datenschutz-Einstellungen</button
+      >
+    </div>
  
   </div>
 </footer>
