@@ -111,13 +111,14 @@ const calendarOptions = [
     class="save-date-popup-modal"
     tabindex="-1"
     aria-modal="true"
+    aria-labelledby="save-date-popup-title"
     role="dialog"
 >
     <div class="save-date-popup-content">
         <a href="#" class="save-date-popup-close" aria-label="Schließen"
             >&times;</a
         >
-        <h2>Im Kalender speichern</h2>
+        <h2 id="save-date-popup-title">Im Kalender speichern</h2>
         <div class="save-date-popup-options">
             {
                 calendarOptions.map((option) => (

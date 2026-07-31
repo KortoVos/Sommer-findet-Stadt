@@ -110,10 +110,19 @@ const listItems = root.childNodes;
 <script type="module">
   class Carousel extends HTMLElement {
     connectedCallback() {
+      if (this.dataset.carouselReady === 'true') {
+        return;
+      }
+      this.dataset.carouselReady = 'true';
+
       const root = this;
       const inner = root.querySelector('.carousel-inner');
       const dots = root.querySelectorAll('.carousel-dot');
       const items = root.querySelectorAll('.carousel-item');
+      if (!inner || items.length === 0) {
+        return;
+      }
+
       let currentIndex = 0;
       function updateCarousel(index) {
         items.forEach((item, i) => {
@@ -188,5 +197,7 @@ const listItems = root.childNodes;
       });
     }
   }
-  customElements.define('carousel-gallery', Carousel);
+  if (!customElements.get('carousel-gallery')) {
+    customElements.define('carousel-gallery', Carousel);
+  }
 </script>
