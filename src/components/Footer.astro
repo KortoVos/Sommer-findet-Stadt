@@ -93,23 +93,13 @@ const { showImpressumLink = true } = Astro.props;
     padding: 1.5rem clamp(1rem, 5vw, 5rem) max(2rem, env(safe-area-inset-bottom));
     box-sizing: border-box;
   }
-  .footer-impressum-link {
+  .footer-legal-link {
     color: var(--color-primary, #ea506e);
     font: inherit;
     text-decoration: underline;
   }
-  .footer-privacy-settings {
-    border: 0;
-    background: transparent;
-    color: var(--color-primary, #ea506e);
-    font: inherit;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  .footer-impressum-link:hover,
-  .footer-impressum-link:focus,
-  .footer-privacy-settings:hover,
-  .footer-privacy-settings:focus {
+  .footer-legal-link:hover,
+  .footer-legal-link:focus {
     color: var(--color-accent);
   }
 
@@ -170,14 +160,11 @@ const { showImpressumLink = true } = Astro.props;
     <div class="footer-privacy-container">
       {
         showImpressumLink && (
-          <a href="/impressum/" class="footer-impressum-link">Impressum</a>
+          <a href="/impressum/" class="footer-legal-link">
+            Impressum &amp; Datenschutzerkl&auml;rung
+          </a>
         )
       }
-      <button
-        class="footer-privacy-settings"
-        type="button"
-        data-clarity-settings>Datenschutz-Einstellungen</button
-      >
     </div>
  
   </div>

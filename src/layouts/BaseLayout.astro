@@ -13,89 +13,23 @@ import '../styles/global.css';
     <title>Sommer findet Stadt</title>
     <script type="text/javascript">
       (function (projectId) {
-        const consentKey = 'sfs_clarity_consent';
-        const consentSource = 'sommer-findet-stadt-consent';
-        const storedConsent = (function () {
-          try {
-            return localStorage.getItem(consentKey);
-          } catch {
-            return null;
-          }
-        })();
-
         window.clarity =
           window.clarity ||
           function () {
             (window.clarity.q = window.clarity.q || []).push(arguments);
           };
 
-        function updateClarityConsent(consent) {
-          window.clarity('consentv2', {
-            source: consentSource,
-            ad_Storage: 'denied',
-            analytics_Storage: consent === 'granted' ? 'granted' : 'denied',
-          });
-        }
-
-        updateClarityConsent(storedConsent || 'denied');
+        window.clarity('consentv2', {
+          ad_Storage: 'denied',
+          analytics_Storage: 'denied',
+        });
 
         const t = document.createElement('script');
         t.async = 1;
         t.src = 'https://www.clarity.ms/tag/' + projectId;
         const y = document.getElementsByTagName('script')[0];
         y.parentNode.insertBefore(t, y);
-
-        window.sfsSetClarityConsent = function (consent) {
-          try {
-            localStorage.setItem(consentKey, consent);
-          } catch {
-            // Consent still applies for the current page view.
-          }
-          updateClarityConsent(consent);
-          document.documentElement.dataset.clarityConsent = consent;
-        };
-
-        document.documentElement.dataset.clarityConsent =
-          storedConsent || 'unset';
       })('xufl4hhi44');
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const notice = document.querySelector('[data-clarity-notice]');
-        const settingsButtons = document.querySelectorAll(
-          '[data-clarity-settings]'
-        );
-
-        function showNotice() {
-          notice?.removeAttribute('hidden');
-        }
-
-        function hideNotice() {
-          notice?.setAttribute('hidden', '');
-        }
-
-        if (document.documentElement.dataset.clarityConsent === 'unset') {
-          showNotice();
-        }
-
-        document
-          .querySelector('[data-clarity-accept]')
-          ?.addEventListener('click', () => {
-            window.sfsSetClarityConsent?.('granted');
-            hideNotice();
-          });
-
-        document
-          .querySelector('[data-clarity-decline]')
-          ?.addEventListener('click', () => {
-            window.sfsSetClarityConsent?.('denied');
-            hideNotice();
-          });
-
-        settingsButtons.forEach((button) => {
-          button.addEventListener('click', showNotice);
-        });
-      });
     </script>
     <style>
       html {
@@ -118,75 +52,6 @@ import '../styles/global.css';
         margin: 0 auto;
         box-sizing: border-box;
       }
-
-      .clarity-notice {
-        position: fixed;
-        right: clamp(1rem, 3vw, 2rem);
-        bottom: clamp(1rem, 3vw, 2rem);
-        z-index: 50;
-        width: min(28rem, calc(100vw - 2rem));
-        box-sizing: border-box;
-        padding: 1rem;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.96);
-        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
-        text-align: left;
-      }
-
-      .clarity-notice[hidden] {
-        display: none;
-      }
-
-      .clarity-notice p {
-        margin: 0;
-        color: var(--color-text);
-        font-size: 0.95rem;
-        line-height: 1.45;
-      }
-
-      .clarity-notice-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-        justify-content: flex-end;
-        margin-top: 0.9rem;
-      }
-
-      .clarity-notice button {
-        min-height: 2.5rem;
-        border: 1px solid var(--color-primary);
-        border-radius: 999px;
-        padding: 0.55rem 0.9rem;
-        font: inherit;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .clarity-notice-decline {
-        background: #fff;
-        color: var(--color-primary);
-      }
-
-      .clarity-notice-accept {
-        background: var(--color-primary);
-        color: #fff;
-      }
-
-      @media (max-width: 640px) {
-        .clarity-notice {
-          right: 1rem;
-          bottom: 1rem;
-        }
-
-        .clarity-notice-actions {
-          justify-content: stretch;
-        }
-
-        .clarity-notice button {
-          flex: 1 1 8rem;
-        }
-      }
     </style>
   </head>
   <body>
@@ -196,24 +61,5 @@ import '../styles/global.css';
       <slot />
     </main>
     <slot name="footer" />
-    <section class="clarity-notice" data-clarity-notice hidden>
-      <p>
-        Wir nutzen Microsoft Clarity, um anonymisierte Statistiken zur Nutzung
-        dieser Website zu erhalten. Dabei k&ouml;nnen Analyse-Cookies gesetzt
-        werden. Du kannst selbst entscheiden.
-      </p>
-      <div class="clarity-notice-actions">
-        <button
-          class="clarity-notice-decline"
-          type="button"
-          data-clarity-decline>Ablehnen</button
-        >
-        <button
-          class="clarity-notice-accept"
-          type="button"
-          data-clarity-accept>Akzeptieren</button
-        >
-      </div>
-    </section>
   </body>
 </html>
